@@ -1,0 +1,296 @@
+\documentclass[a4, 11pt, twoside]{article}
+
+\usepackage{pstricks,pst-plot}
+\usepackage[utf8]{inputenc}
+\usepackage[english,norsk]{babel}
+
+\usepackage{ulem}
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xcolor}
+
+\usepackage{natbib}
+
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  %captionpos=b,                   % sets the caption-position to bottom
+  commentstyle=\color{blue},       % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{orange},       % keyword style
+  language=Python,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{violet},      % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+}
+
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+
+% This concludes the preamble
+
+\usepackage[colorlinks=true,citecolor=red]{hyperref}
+
+% \usepackage[norsk]{babel}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{makeidx}
+\usepackage{graphicx}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\usepackage{accents}
+\newcommand{\interior}[1]{\accentset{\smash{\raisebox{-0.12ex}{$\scriptstyle\circ$}}}{#1}\rule{0pt}{2.3ex}}
+\fboxrule0.0001pt \fboxsep0pt
+
+% used for diagrams, not needed here
+% \usepackage{tikz}
+% \usepackage{tikz-cd}
+% \usetikzlibrary{matrix, arrows, decorations}
+
+
+
+%%% New environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{eksempel}[theorem]{Eksempel}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{nremark}[theorem]{Bemerkning}
+\newtheorem{advarsel}[theorem]{ADVARSEL}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{improvement}[theorem]{Improvement}
+\newtheorem{discus}[theorem]{Discus}
+\newtheorem{ptheorem}[theorem]{Possible Theorem}
+\newtheorem{project}[theorem]{Project}
+\newtheorem{solution}[theorem]{Solution}
+\newcommand\hra{\hookrightarrow}
+
+%%% Custom definitions and macros
+
+
+\DeclareMathOperator{\vspan}{Span}
+\renewcommand{\d}{\mathrm{\; d}} % for differensialet i integraler.
+
+\newcommand{\Aut}{\mathop{{\rm Aut}}}
+\newcommand{\End}{\mathop{{\rm End}}}
+\newcommand{\Hom}{\mathop{{\rm Hom}}}
+\newcommand{\rank}{\mathop{{\rm rank}}}
+\newcommand{\st}{\text{ s.t }}
+\renewcommand{\div}{\mathop{{\rm div}}}
+
+\DeclareMathOperator{\Dx}{\frac{\d}{\d x}}
+\DeclareMathOperator{\DDx}{\frac{\d^2}{\d x^2}}
+\DeclareMathOperator{\erf}{erf}
+\DeclareMathOperator{\erfc}{erfc}
+\DeclareMathOperator{\sign}{sgn}
+
+
+% Caligraphic letters
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cZ}{\mathcal{Z}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cW}{\mathcal{W}}
+
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\renewcommand{\H}{\mathbb{H}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\U}{\mathbb{U}}
+\newcommand{\bT}{\mathbb{T}}
+\newcommand{\bD}{\mathbb{D}}
+
+\newcommand{\vu}{\boldsymbol{u}}
+\newcommand{\vv}{\boldsymbol{v}}
+\newcommand{\vn}{\boldsymbol{n}}
+\newcommand{\vf}{\boldsymbol{f}}
+
+\def\di{\partial}
+\def\bs{\backslash}
+\def\e{\epsilon}
+\def\la{\langle}
+\def\ra{\rangle}
+
+
+
+\renewcommand{\d}{\;\text{d}}
+\newcommand{\ocM}{\overline{\mathcal{M}}^{+}}
+\newcommand{\ocB}{\overline{\mathcal{B}}}
+\newcommand{\ocA}{\overline{\mathcal{A}}}
+\newcommand{\Lp}{\text{L}}
+\newcommand{\aev}{\text{ a.e }}
+\newcommand{\aeev}{\text{-a.e }}
+
+\newcommand{\llra}{\xrightarrow{\hspace*{1cm}}}
+
+\DeclareMathOperator*{\supp}{supp}
+\DeclareMathOperator*{\essup}{essup}
+
+
+\fancyhead[LE, RO]{Tall og Algebra}
+\fancyhead[RE, LO]{Veien om 1}
+\setlength{\headheight}{14pt}
+
+\usepackage{exercise}
+\def\ExerciseName{Oppgave}
+
+
+\begin{document}
+
+\section*{Repetisjon/oppvarming: brøkregning}
+Husk at vi kan forkorte og utvide brøker. Vi kan
+gange teller og nevner med samme tall, uten å forandre verdien av brøken.
+\begin{eksempel}
+\[ \frac{5}{2} = \frac{5\cdot3}{2\cdot3} = \frac{15}{6}\]
+Dette vanligvis å utvide brøken.
+På akkurat samme måte kan vi forkorte brøker. I eksempelet over har vi da
+at
+\[\frac{15}{6} = \frac{5\cdot3}{2\cdot3} = \frac{5}{2}\]
+Dette blir ofte kalt å forkorte brøken, eller å stryke felles faktorer.
+\end{eksempel}
+
+Her er noen videoer dere kan se før dere begynner på oppgavesettet og
+underveis:
+Introduksjonsvideoer:
+\begin{itemize}
+  \item \url{https://www.youtube.com/watch?v=eBKho1HIWT4}
+  \item \url{https://www.youtube.com/watch?v=vXlNh9UHmXc}
+\end{itemize}
+
+\begin{Exercise}
+Per liker å trene. Han betaler 450kr i måneden for et treningsstudio.
+I en vanlig måned trener han 25 ganger. Hvor mye betaler han per
+trening i en vanlig måned?
+\end{Exercise}
+
+\begin{Exercise}
+Jens gikk en tur på 2,5 km på 20 min.
+\begin{itemize}
+\item[\bf a)] Hvor mange minutter brukte Jens på én km?
+\item[\bf b)] Hvis han holder samme hastighet,
+hvor lang tid bruker han på å gå 3,4km ?
+\end{itemize}
+\end{Exercise}
+
+\begin{Exercise}
+En iskrem kommer i to forskjellige innpakninger.
+En koster 24,90kr for 240g, mens en annen koster 
+27,70 for 330g. Hvilken pakke lønner det seg å kjøpe?
+\end{Exercise}
+
+\begin{Exercise}
+En pakke med torsk på 675g fra produsenten ''Fuskeoppdrett AS''
+koster 114kr, mens en pakke på 520g fra produsenten ''Sjarkfisk''
+koster 90kr. Hvilken produsent har billigst fisk?
+\end{Exercise}
+
+\begin{Exercise}
+  I en kakeoppskrift trengs det 750g hvetemel til 6 egg.
+  Du har bare 2 egg på en søndag, men veldig lyst på kake.
+  Hvor mange gram hvetemel trengs det til en oppskrift på 2 egg?
+\end{Exercise}
+
+\begin{Exercise}
+Din lokale klesforretning har en bukse på tilbud. Ordinær pris er
+420kr, og buksen er satt ned 25\%.
+\begin{itemize}
+\item[\bf a)] Hvor mye er én prosent av ordinær pris?
+\item[\bf b)] Hvor mange kroner utgjorde rabatten?
+\item[\bf c)] Hva var tilbudsprisen?
+\end{itemize}
+\end{Exercise}
+
+
+
+\begin{Exercise}
+Din lokale klesforretning har en skjorte på tilbud. Ordinær pris er
+540kr, og skjorta er satt ned 20\%.
+\begin{itemize}
+\item[\bf a)] Hvor mye er én prosent av ordinær pris?
+\item[\bf b)] Hvor mange kroner utgjorde rabatten?
+\item[\bf c)] Hva var tilbudsprisen?
+\end{itemize}
+\end{Exercise}
+
+\begin{Exercise}
+Din lokale klesforretning har en skjorte på tilbud. Tilbudspris er
+430kr, og skjorta er satt ned 20\% (av ordinær pris).
+\begin{itemize}
+\item[\bf a)] Forklar at tilbudsprisen utgjør 80\% av ordinær pris
+\item[\bf b)] Hvor mye er én prosent av ordinær pris? (gå veien om 1)
+\item[\bf c)] Hva var ordinær pris?
+\item[\bf d)] Hvor mange kroner utgjorde rabatten?
+\end{itemize}
+\end{Exercise}
+
+\begin{Exercise}
+Per skal gå en tur på fjellet. Han har trent i lang tid, men på noe
+kortere turer. Han går 20km på 4 timer under treningsøktene.
+\begin{itemize}
+\item[\bf a)] Hvor lang tid bruker han på 35km med denne farta?
+\item[\bf b)] Per regner med å gå 7 timer hver dag mens han er i fjellet.
+Hvor langt går han hver dag hvis farten er som over?
+\end{itemize}
+\end{Exercise}
+
+\begin{Exercise}
+Petter skal male en vegg. Han bruker 5L maling på 7m$^2$. Hvor mye
+maling bruker han på vegg med areal 50m$^2$.
+\end{Exercise}
+
+\begin{Exercise}
+Gjør oppgavene 154, 156, og 157 side 238 i læreboken ''Matematikk 1P, Aschehoug ,2009''.
+\end{Exercise}
+
+\section*{Mer avanserte teknikker med veien om 1 (forhold,
+saftblandinger, finne gammel verdi i prosentregning)}
+Her kommer det flere oppgaver senere.
+
+\end{document}

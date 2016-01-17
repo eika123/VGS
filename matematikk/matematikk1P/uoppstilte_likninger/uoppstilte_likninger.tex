@@ -1,0 +1,391 @@
+\documentclass[a4, 11pt, twoside]{article}
+
+\usepackage{pstricks,pst-plot}
+\usepackage[utf8]{inputenc}
+\usepackage[english,norsk]{babel}
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xcolor}
+
+\usepackage{natbib}
+
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  %captionpos=b,                   % sets the caption-position to bottom
+  commentstyle=\color{blue},       % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{orange},       % keyword style
+  language=Python,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{violet},      % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+}
+
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+
+% This concludes the preamble
+
+\usepackage[colorlinks=true,citecolor=red]{hyperref}
+
+% \usepackage[norsk]{babel}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{makeidx}
+\usepackage{graphicx}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\usepackage{accents}
+\newcommand{\interior}[1]{\accentset{\smash{\raisebox{-0.12ex}{$\scriptstyle\circ$}}}{#1}\rule{0pt}{2.3ex}}
+\fboxrule0.0001pt \fboxsep0pt
+
+% used for diagrams, not needed here
+% \usepackage{tikz}
+% \usepackage{tikz-cd}
+% \usetikzlibrary{matrix, arrows, decorations}
+
+
+
+%%% New environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{eksempel}[theorem]{Eksempel}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{nremark}[theorem]{Bemerkning}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{improvement}[theorem]{Improvement}
+\newtheorem{discus}[theorem]{Discus}
+\newtheorem{ptheorem}[theorem]{Possible Theorem}
+\newtheorem{project}[theorem]{Project}
+\newtheorem{solution}[theorem]{Solution}
+\newcommand\hra{\hookrightarrow}
+
+%%% Custom definitions and macros
+
+
+\DeclareMathOperator{\vspan}{Span}
+\renewcommand{\d}{\mathrm{\; d}} % for differensialet i integraler.
+
+\newcommand{\Aut}{\mathop{{\rm Aut}}}
+\newcommand{\End}{\mathop{{\rm End}}}
+\newcommand{\Hom}{\mathop{{\rm Hom}}}
+\newcommand{\rank}{\mathop{{\rm rank}}}
+\newcommand{\st}{\text{ s.t }}
+\renewcommand{\div}{\mathop{{\rm div}}}
+
+\DeclareMathOperator{\Dx}{\frac{\d}{\d x}}
+\DeclareMathOperator{\DDx}{\frac{\d^2}{\d x^2}}
+\DeclareMathOperator{\erf}{erf}
+\DeclareMathOperator{\erfc}{erfc}
+\DeclareMathOperator{\sign}{sgn}
+
+
+% Caligraphic letters
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cZ}{\mathcal{Z}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cW}{\mathcal{W}}
+
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\renewcommand{\H}{\mathbb{H}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\U}{\mathbb{U}}
+\newcommand{\bT}{\mathbb{T}}
+\newcommand{\bD}{\mathbb{D}}
+
+\newcommand{\vu}{\boldsymbol{u}}
+\newcommand{\vv}{\boldsymbol{v}}
+\newcommand{\vn}{\boldsymbol{n}}
+\newcommand{\vf}{\boldsymbol{f}}
+
+\def\di{\partial}
+\def\bs{\backslash}
+\def\e{\epsilon}
+\def\la{\langle}
+\def\ra{\rangle}
+
+
+
+\renewcommand{\d}{\;\text{d}}
+\newcommand{\ocM}{\overline{\mathcal{M}}^{+}}
+\newcommand{\ocB}{\overline{\mathcal{B}}}
+\newcommand{\ocA}{\overline{\mathcal{A}}}
+\newcommand{\Lp}{\text{L}}
+\newcommand{\aev}{\text{ a.e }}
+\newcommand{\aeev}{\text{-a.e }}
+
+\newcommand{\llra}{\xrightarrow{\hspace*{1cm}}}
+
+\DeclareMathOperator*{\supp}{supp}
+\DeclareMathOperator*{\essup}{essup}
+
+
+\fancyhead[LE, RO]{Algebra}
+\fancyhead[RE, LO]{Uoppstilte likninger}
+\setlength{\headheight}{14pt}
+
+\usepackage{exercise}
+\def\ExerciseName{Oppgave}
+
+
+\begin{document}
+
+\section*{Repetisjon/oppvarming}
+Her er noen videoer dere kan se før dere begynner på oppgavesettet og
+underveis:
+Introduksjonsvideo:
+\begin{itemize}
+  \item \url{https://www.youtube.com/watch?v=la9PFrpt85M}
+\end{itemize}
+Flere videoer:
+\begin{itemize}
+  \item \url{https://www.youtube.com/watch?v=cHdzKLuz8LE} (medlemmer i en svømmeklubb)
+  \item \url{https://www.youtube.com/watch?v=YYijfTD3WvQ} (differansen til to tall)
+\end{itemize}
+\begin{Exercise}
+Løs likningene med hensyn på $x$ ved regning: \newline
+\begin{itemize}
+\item[\bf a)] \[ \frac{x}{3} = \frac{2}{3} \]
+\item[\bf b)] \[ \frac{x}{5} = \frac{2}{3} \]
+\item[\bf c)] \[8(8x - 6) + 14 = 94 \]
+\item[\bf d)] \[-11(7x - 2) + 18 = -37\]
+\end{itemize}
+\end{Exercise}
+
+
+\section*{Uoppstilte likninger}
+Det er viktig at dere leser teksten nøye. Bruk gjerne
+følgende tabell til å tolke teksten
+
+\begin{center}
+\begin{tabular}{|l | l | l |}
+\hline
+fem mindre enn $x$ & $x - 5$ \\ \hline 
+fem mer enn $x$ &  $x + 5$ \\ \hline
+fem ganger så mye som $x$ & $5x$ \\ \hline
+halvparten av $x$ & $\frac{x}{2}$ \\ \hline
+$x$ sjudeler & $\frac{x}{7}$ \\ \hline
+\end{tabular}
+\end{center}
+\begin{eksempel}
+  Vi ser på en typisk oppgave: \newline
+Anders har tre ganger så mange penger som
+ Kari. Anta at Kari har $x$ kroner.
+\begin{itemize}
+ \item[\bf a)] Sett opp et utrykk som beskriver hvor mye penger Kari og Anders har til sammen
+ \item[\bf b)] Anta at de til sammen har 1000 kr. Hvor mye penger har hver av dem?
+\end{itemize}
+LØSNING: Siden oppgaven sier at Kari har $x$ kroner, og at Anders har
+tre ganger så mange kroner, må altså Anders ha $3\cdot x = 3x$ kroner.
+Utrykket som forteller hvor mye de har til sammen, er selvsagt pengene
+til Kari og Anders lagt sammen:
+\begin{itemize}
+  \item[\bf a)] Kari sine penger + Anders sine penger $ = x + 3x = 4x$.
+  \item[\bf b)] Til sammen skal de ha 1000kr. Altså må
+    \[4x = 1000 \]
+    Vi løser likningen og får da
+    \begin{align*}
+      4x & = 1000 \\
+      \frac{4x}{4} & = \frac{1000}{4} \\
+      x & = 250
+    \end{align*}
+\begin{itemize}
+\end{eksempel}
+
+\begin{Exercise}
+Anders har dobbelt så mange penger som
+ Kari. Anta at Kari har $x$ kroner.
+\begin{itemize}
+ \item[\bf a)] Sett opp et utrykk som beskriver hvor mye penger Kari og Anders har til sammen
+ \item[\bf b)] Anta at de til sammen har 1000 kr. Hvor mye penger har hver av dem?
+\end{itemize}
+\end{Exercise}
+
+\begin{Exercise}
+Ove har 200 kroner mer enn
+ Per. Anta at Per har $x$ kroner.
+\begin{itemize}
+ \item[\bf a)] Sett opp et utrykk som beskriver hvor mye penger Ove og Per har til sammen
+ \item[\bf b)] Anta at de til sammen har 1200 kr. Hvor mye penger har hver av dem?
+\end{itemize}
+\end{Exercise}
+
+\begin{Exercise}
+Anders har dobbelt så mange penger som
+ Anne. Kari har 400 kr mer enn Anne. Anta at Anne har $x$ kroner.
+\begin{itemize}
+ \item[\bf a)] Sett opp et utrykk som beskriver hvor mye penger Kari, Anders og Anne har til 
+ sammen.
+ \item[\bf b)] Anta at de til sammen har 5200 kr. Hvor mye penger har hver av dem?
+\end{itemize}
+\end{Exercise}
+
+\begin{Exercise}
+Anders har dobbelt så mange penger som Anne. 
+Kari har 1200 kr mer enn Anne.
+\begin{itemize}
+ \item[\bf a)] Sett opp et utrykk som beskriver hvor mye penger Kari, Anders og Anne har til 
+ sammen.
+ \item[\bf b)] Anta at de til sammen har 7600 kr. Hvor mye penger har hver av dem?
+\end{itemize}
+\end{Exercise}
+
+\begin{Exercise}
+  Ole er 3 ganger så gammel som Pål, som er fire år eldre enn Jens.
+  Til sammen er de 146 år gamle. Hvor gamle er hver av dem?
+\end{Exercise}
+
+\begin{Exercise}
+I fotball får et lag tre poeng for seier og ett poeng for uavgjort.
+I fjor vant laget til Odd ni flere kamper enn de spilte uavgjort. De
+fikk til sammen 67 poeng. \newline
+Hvor mange kamper vant laget til Odd?
+\end{Exercise}
+
+\begin{Exercise}
+Jens skal lage en bunnplate til en tank. Bunnplaten skal være
+formet som et rektangel.
+Rundt platen skal det settes en svært dyr
+pakning til 40000 kr/m. For å få en akseptabel pris på
+tanken, har han 20m pakning til rådighet på hver plate.
+\begin{itemize}
+  \item[\bf a)] Forklar at omkretsen til platen må være 20m
+\end{itemize}
+Vi lar to av sidene i bunnplaten være $x$ meter lange.
+\begin{itemize}
+  \item[\bf b)] Forklar at de to andre sidene da er $x - 10$ meter
+    lange.
+  \item[\bf c)] Forklar at arealet av platen da blir gitt ved funksjonen
+    \[ A(x) = x(x - 10). \]
+\end{itemize}
+\end{Exercise}
+
+
+\begin{Exercise}
+  I et spill kastes en blå terning og en hvit terning. Om spilleren
+  klarer en utfordring som trekkes fra en kortstokk, får de trekke
+  en spesiell regel fra en regel-kortstokk, som forteller
+  hvor mange steg spilleren får fortsette etter å ha kastet
+  terningene.\newline
+  Åse klarer sin utfordring, og får trekke et regel-kort.
+      På kortet står det: ''Gang antall øyne på blå terning med 5,
+      og trekk fra 2 ganger antall øyne på hvit terning''
+  \begin{itemize}
+    \item[\bf a)] Hvis Åse får 3 blå øyne og 6 hvite øyne, hvor mange
+      ganger kan hun flytte brikken sin?
+    \item[\bf b)] Sett opp et bokstavuttrykk eller en formel som
+      forklarer hvor mange steg Åse kan ta med denne regelen.
+  \end{itemize}
+  På et annet kort står det: \newline
+    ''Antall steg du får ta, ganget med antall blå øyne, er 
+    19 minus antall hvite øyne.''
+  \begin{itemize}
+    \item[\bf c)] Hvis antall blå og hvite øyne var som i oppgave a),
+      finn likningen som beskriver antall steg man kan ta.
+    \item[\bf d)] Løs likningen du fant i c)
+    \item[\bf e)] Hva er den generelle likningen som fungerer for alle
+      terningkastene?
+  \end{itemize}
+\end{Exercise}
+
+
+\begin{Exercise}
+\begin{itemize}
+ \item[\bf a)]
+ Britt, Ali og Ole er ute og reiser.
+ Britt og Ali bruker like mye tid. Ole bruker 30 timer mer enn de to andre.
+ Til sammen reiser de i 120 timer. Still opp en likning, og regn ut
+ hvor lenge hver av dem reiser.
+
+ \item[\bf b)]
+ En gruppe på fire personer bestående av Åse, Bob, Janne og Fredrik skal
+ ut å reise. Til sammen trenger de
+ $8,9343\cdot10^4\text{kr}$.
+ \begin{itemize}
+  \item Åse betaler 3,5 ganger så mye som Kåre
+  \item Bob betaler 244 kroner mer enn Åse
+  \item Janne betaler halvparten så mye som Kåre
+  \item Fredrik betaler $\frac{7}{2}$ ganger så mye som Janne.
+ \end{itemize}
+ Sett opp en likning som beskriver situasjonen. Forklar hvilken
+ person hvert ledd representerer, og finn ut hvor mye penger hver
+ av dem betaler.
+\end{itemize}
+\end{Exercise}
+
+\begin{Exercise}
+Formelen for BMI er gitt ved \[I = \frac{m}{h^2}, \]
+der $I$  er BMI (body mass index), $m$ er vekten til personen målt i kilogram
+($kg$),
+    og $h$  er høyden målt i meter. 
+    Kåre veier $80 kg$ og har en BMI på $20$. Snu formelen for å få en
+    formel for høyden, og regn ut hvor høy Kåre er.
+\end{Exercise}
+
+\begin{Exercise}
+Vi ser på Ohms lov, \[ U = RI. \]
+\begin{itemize}
+\item[\bf a)] Anta $R = 5$, og $I = 0,25$. Finn ut hva $U$ er.
+\item[\bf b)] Anta $U = 12$, og at $R = 36$. Sett tallene inn i Ohms lov, og vis at du får en likning
+for $I$. Løs denne, og finn ut hva $I$ må være.
+\item[\bf c)] Anta $U = 12$, og $I = 0.5$. Sett tallene inn i Ohms lov, og vis at du får en likning for
+$R$. Løs denne likningen, og finn ut hva $R$ må være.
+\item[\bf d)] Snu Ohms lov, og finn en formel for $I$. Sett inn tallene for $U$ og $R$ fra oppgave b),
+og sammenlign svarene.
+\item[\bf e)] Snu Ohms lov, og finn en formel for $R$. Sett inn tallene for $U$ og $I$ fra oppgave c),
+og sammenlign svarene.
+\end{itemize}
+\end{Exercise}
+
+\end{document}
