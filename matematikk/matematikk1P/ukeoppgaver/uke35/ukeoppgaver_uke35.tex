@@ -1,0 +1,299 @@
+\documentclass[a4, 11pt, twoside]{article}
+
+%\usepackage{pstricks,pst-plot}
+\usepackage[utf8]{inputenc}
+\usepackage[english,norsk]{babel}
+
+\usepackage{pgf,tikz}
+\usepackage{tkz-euclide}
+\usepackage{mathrsfs}
+
+
+\usetikzlibrary{arrows, intersections}
+\tikzset{
+  hpil/.style={
+          ->,
+          thick,
+          shorten <=2pt,
+          shorten =>2pt,}
+}
+\tikzset{
+  vpil/.style={
+          <-,
+          thick,
+          shorten =>2pt,}
+}
+\newcommand{\degre}{\ensuremath{^\circ}}
+
+\usepackage{ulem}
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xcolor}
+
+% ------------------------------ package tcolorbox with definitions ----------------------
+\usepackage{tcolorbox}
+\tcbset{textmarker/.style={%
+    skin=enhancedmiddle jigsaw, breakable, parbox=false,
+    boxrule=0mm, leftrule=0mm, rightrule=0mm, boxsep=0mm, arc=0mm, outer arc=0mm,
+    left=3mm, right=3mm, top=2mm, toptitle=2mm, bottomtitle=1mm, oversize }}
+
+    \newtcolorbox{yellow}{textmarker, colback=yellow!45!white, colframe=yellow}
+    \newtcolorbox{blue}{textmarker, colback=blue!20!white, colframe=blue}
+    \newtcolorbox{green}{textmarker, colback=green!30!white, colframe=green}
+
+
+% ----------------------------------------------------------------------------------------
+
+\usepackage{natbib}
+
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  %captionpos=b,                   % sets the caption-position to bottom
+  commentstyle=\color{blue},       % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{orange},       % keyword style
+  language=Python,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{violet},      % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+}
+
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+
+% This concludes the preamble
+
+\usepackage[colorlinks=true,citecolor=red]{hyperref}
+
+% \usepackage[norsk]{babel}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{makeidx}
+\usepackage{graphicx}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\usepackage{accents}
+\newcommand{\interior}[1]{\accentset{\smash{\raisebox{-0.12ex}{$\scriptstyle\circ$}}}{#1}\rule{0pt}{2.3ex}}
+\fboxrule0.0001pt \fboxsep0pt
+
+% used for diagrams, not needed here
+% \usepackage{tikz}
+% \usepackage{tikz-cd}
+% \usetikzlibrary{matrix, arrows, decorations}
+
+%\newcommand\xqed[1]{%
+%  \leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill
+%  \quad\hbox{#1}}
+%\newcommand\demo{\xqed{$\triangle$}}
+
+
+\definecolor{shadecolor}{RGB}{150,150,150}
+\newcommand{\examplebox}[1]{\par\noindent\colorbox{shadecolor}
+{\parbox{\dimexpr\textwidth-2\fboxsep\relax}{#1}}}
+
+
+%%% New environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{ntheorem}{Teorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{eksempelx}{Eksempel}
+\newenvironment{eksempel}
+   {\pushQED{\qed}\renewcommand{\qedsymbol}{%\textbf{eksempel slutt:}
+   $\clubsuit$}\eksempelx}
+   {\popQED\endeksempelx}
+\setcounter{eksempel}{0}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{nremark}[theorem]{Bemerkning}
+\newtheorem{advarsel}[theorem]{ADVARSEL}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{improvement}[theorem]{Improvement}
+\newtheorem{discus}[theorem]{Discus}
+\newtheorem{ptheorem}[theorem]{Possible Theorem}
+\newtheorem{project}[theorem]{Project}
+\newtheorem{solution}[theorem]{Solution}
+\newcommand\hra{\hookrightarrow}
+
+
+
+%%% Custom definitions and macros
+
+
+\DeclareMathOperator{\vspan}{Span}
+\renewcommand{\d}{\mathrm{\; d}} % for differensialet i integraler.
+
+\newcommand{\Aut}{\mathop{{\rm Aut}}}
+\newcommand{\End}{\mathop{{\rm End}}}
+\newcommand{\Hom}{\mathop{{\rm Hom}}}
+\newcommand{\rank}{\mathop{{\rm rank}}}
+\newcommand{\st}{\text{ s.t }}
+\renewcommand{\div}{\mathop{{\rm div}}}
+
+\DeclareMathOperator{\Dx}{\frac{\d}{\d x}}
+\DeclareMathOperator{\DDx}{\frac{\d^2}{\d x^2}}
+\DeclareMathOperator{\erf}{erf}
+\DeclareMathOperator{\erfc}{erfc}
+\DeclareMathOperator{\sign}{sgn}
+
+
+% Caligraphic letters
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cZ}{\mathcal{Z}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cW}{\mathcal{W}}
+
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\renewcommand{\H}{\mathbb{H}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\U}{\mathbb{U}}
+\newcommand{\bT}{\mathbb{T}}
+\newcommand{\bD}{\mathbb{D}}
+
+\newcommand{\vu}{\boldsymbol{u}}
+\newcommand{\vv}{\boldsymbol{v}}
+\newcommand{\vn}{\boldsymbol{n}}
+\newcommand{\vf}{\boldsymbol{f}}
+
+\def\di{\partial}
+\def\bs{\backslash}
+\def\e{\epsilon}
+\def\la{\langle}
+\def\ra{\rangle}
+
+
+
+\renewcommand{\d}{\;\text{d}}
+\newcommand{\ocM}{\overline{\mathcal{M}}^{+}}
+\newcommand{\ocB}{\overline{\mathcal{B}}}
+\newcommand{\ocA}{\overline{\mathcal{A}}}
+\newcommand{\Lp}{\text{L}}
+\newcommand{\aev}{\text{ a.e }}
+\newcommand{\aeev}{\text{-a.e }}
+\newcommand{\cm}{\text{cm}}
+\newcommand{\m}{\text{m}}
+\newcommand{\mm}{\text{mm}}
+\newcommand{\km}{\text{km}}
+
+\newcommand{\llra}{\xrightarrow{\hspace*{1cm}}}
+
+\DeclareMathOperator*{\supp}{supp}
+\DeclareMathOperator*{\essup}{essup}
+
+
+\fancyhead[LE, RO]{Ukeoppgaver Uke35}
+\fancyhead[RE, LO]{29 August -  5. september}
+\setlength{\headheight}{14pt}
+
+
+%\usepackage[noanswer]{exercise}
+\usepackage{exercise}
+\def\ExerciseName{Oppgave}
+\begin{document}
+\section{Regnerekkefølgen}
+Husk regnerekkefølgen!
+\begin{description}
+\item[1.] Paranteser
+\item[2.] Eksponenter / Potenser
+\item[3.] Multiplikasjon og divisjon
+\item[4.] Addisjon og subtraksjon
+\end{description}
+Dere kan huske på forkortelsen PEMDAS!
+\subsection{Oppgaver i læreboka}
+Innlæringsoppgaver: 1.5 - 1.10 side 12 - 15.
+
+Stioppgaver:
+\begin{center}
+\begin{tabular}{| l | l | l | l |}
+\hline
+\textbf{Lav (sti 1)}                & \textbf{Middels (sti 2)}            &       \textbf{Høy (sti 3)}      \\ \hline
+104, 105 b, e, f), 106a, b, c, d)   & 105, 106, 107                       &         107, 109 **                \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Flere oppgaver om regnerekkefølge}
+
+\begin{Exercise}
+Regn ut:
+\begin{description}
+\item[a)] $(1002 - 1003)^{7}$
+\item[b)] $(4 - 7)^3 + 5\cdot\sqrt{25}$
+\item[c)] $(3 - 5)^4 - 8:2 + 10$
+\item[d)] $(13 - 17)^3 + 3\cdot 20:5 + 4\cdot\sqrt{49}$
+\end{description}
+\end{Exercise}
+
+
+\section{Brøk}
+\subsection{Oppgaver i boken}
+Innlæringsoppgaver: 1.1 - 1.17
+
+
+\subsection{Flere oppgaver om brøk}
+\begin{Exercise}
+Ta for deg brøken \[\frac{5 - x}{5 + x} .\]
+Regn ut verdien av brøken for minst tre forskjellige verdier av $x$.
+Ser du noe mønster? Kommenter
+\end{Exercise}
+
+\begin{Exercise}
+Hvilken brøk er størst, eller er de like store ?
+\begin{description}
+\item[a)] \[\frac{6}{7} \;\;\;\;\;\text{ eller }\;\;\;\;\; \frac{8}{9} \]
+\item[b)] \[\frac{3}{5} \;\;\;\;\;\text{ eller }\;\;\;\;\; \frac{12}{20} \]
+\item[c)] \[\frac{4}{7} \;\;\;\;\;\text{ eller }\;\;\;\;\; \frac{8}{15} \]
+\item[d)] \[\frac{x}{7} \;\;\;\;\;\text{ eller }\;\;\;\;\; \frac{2x}{15} \]
+\end{description}
+\end{Exercise}
+
+
+\end{document}
