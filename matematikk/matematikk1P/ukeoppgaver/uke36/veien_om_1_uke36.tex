@@ -1,0 +1,476 @@
+\documentclass[a4, 11pt, twoside]{article}
+
+\usepackage{pstricks,pst-plot}
+\usepackage[utf8]{inputenc}
+\usepackage[english,norsk]{babel}
+
+\usepackage{ulem}
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xcolor}
+
+\usepackage{natbib}
+
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  %captionpos=b,                   % sets the caption-position to bottom
+  commentstyle=\color{blue},       % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{orange},       % keyword style
+  language=Python,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{violet},      % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+}
+
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+
+% This concludes the preamble
+
+\usepackage[colorlinks=true,citecolor=red]{hyperref}
+
+% \usepackage[norsk]{babel}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{makeidx}
+\usepackage{graphicx}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\usepackage{accents}
+\newcommand{\interior}[1]{\accentset{\smash{\raisebox{-0.12ex}{$\scriptstyle\circ$}}}{#1}\rule{0pt}{2.3ex}}
+\fboxrule0.0001pt \fboxsep0pt
+
+% used for diagrams, not needed here
+% \usepackage{tikz}
+% \usepackage{tikz-cd}
+% \usetikzlibrary{matrix, arrows, decorations}
+
+
+
+%%% New environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{eksempel}[theorem]{Eksempel}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{nremark}[theorem]{Bemerkning}
+\newtheorem{advarsel}[theorem]{ADVARSEL}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{improvement}[theorem]{Improvement}
+\newtheorem{discus}[theorem]{Discus}
+\newtheorem{ptheorem}[theorem]{Possible Theorem}
+\newtheorem{project}[theorem]{Project}
+\newtheorem{solution}[theorem]{Solution}
+\newcommand\hra{\hookrightarrow}
+
+%%% Custom definitions and macros
+
+
+\DeclareMathOperator{\vspan}{Span}
+\renewcommand{\d}{\mathrm{\; d}} % for differensialet i integraler.
+
+\newcommand{\Aut}{\mathop{{\rm Aut}}}
+\newcommand{\End}{\mathop{{\rm End}}}
+\newcommand{\Hom}{\mathop{{\rm Hom}}}
+\newcommand{\rank}{\mathop{{\rm rank}}}
+\newcommand{\st}{\text{ s.t }}
+\renewcommand{\div}{\mathop{{\rm div}}}
+
+\DeclareMathOperator{\Dx}{\frac{\d}{\d x}}
+\DeclareMathOperator{\DDx}{\frac{\d^2}{\d x^2}}
+\DeclareMathOperator{\erf}{erf}
+\DeclareMathOperator{\erfc}{erfc}
+\DeclareMathOperator{\sign}{sgn}
+
+
+% Caligraphic letters
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cZ}{\mathcal{Z}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cW}{\mathcal{W}}
+
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\renewcommand{\H}{\mathbb{H}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\U}{\mathbb{U}}
+\newcommand{\bT}{\mathbb{T}}
+\newcommand{\bD}{\mathbb{D}}
+
+\newcommand{\vu}{\boldsymbol{u}}
+\newcommand{\vv}{\boldsymbol{v}}
+\newcommand{\vn}{\boldsymbol{n}}
+\newcommand{\vf}{\boldsymbol{f}}
+
+\def\di{\partial}
+\def\bs{\backslash}
+\def\e{\epsilon}
+\def\la{\langle}
+\def\ra{\rangle}
+
+
+
+\renewcommand{\d}{\;\text{d}}
+\newcommand{\ocM}{\overline{\mathcal{M}}^{+}}
+\newcommand{\ocB}{\overline{\mathcal{B}}}
+\newcommand{\ocA}{\overline{\mathcal{A}}}
+\newcommand{\Lp}{\text{L}}
+\newcommand{\aev}{\text{ a.e }}
+\newcommand{\aeev}{\text{-a.e }}
+
+\newcommand{\llra}{\xrightarrow{\hspace*{1cm}}}
+
+\DeclareMathOperator*{\supp}{supp}
+\DeclareMathOperator*{\essup}{essup}
+
+
+\fancyhead[LE, RO]{Matematikk 1P uke 36}
+\fancyhead[RE, LO]{Veien om 1}
+\setlength{\headheight}{14pt}
+
+\usepackage{exercise}
+\def\ExerciseName{Oppgave}
+
+\begin{document}
+
+NB! Oppgaver merket med ''$V$'' inneholder mer veiledning i form
+av deloppgaver
+enn dere kan forvente på prøver eller eksamen.
+Sørg derfor for å klare å løse oppgaver uten slik veiledning. Om du
+er usikker på hvordan du kan gå fram, kan du se om du finner en lignende
+oppgave merket med ''V'' og gjøre den først.
+
+
+
+
+\section*{Veien om 1}
+\subsection*{Repetisjon/oppvarming: brøkregning}
+Husk at vi kan forkorte og utvide brøker. Vi kan
+gange teller og nevner med samme tall, uten å forandre verdien av brøken.
+\begin{eksempel}
+\[ \frac{5}{2} = \frac{5\cdot3}{2\cdot3} = \frac{15}{6}\]
+Dette vanligvis å utvide brøken.
+På akkurat samme måte kan vi forkorte brøker. I eksempelet over har vi da
+at
+\[\frac{15}{6} = \frac{5\cdot3}{2\cdot3} = \frac{5}{2}\]
+Dette blir ofte kalt å forkorte brøken, eller å stryke felles faktorer.
+\end{eksempel}
+\begin{eksempel}
+  For oppgavene med prosent: Husk at prosent betyr hundredel, altså kan
+  dere tenke at $\% = \frac{1}{100} = 0,01$. Videre får vi da også at
+  $100\% = 1$. Vi tenker vanligvis at $100\%$ svarer til en hel.
+  Det er også viktig at dere tenker nøye på hvilken størrelse vi
+  skal regne prosenter av. Når for eksempel noe er på tilbud, er det
+  \textit{startverdien} vi skal regne prosenter av, altså ordinær pris.
+  Dette er viktig siden f.eks 30\% av 100kr er mer enn 30\% av 70kr.
+\end{eksempel}
+
+Her er noen videoer dere kan se før dere begynner på oppgavesettet og
+underveis:
+Introduksjonsvideoer:
+\begin{description}
+  \item \url{https://www.youtube.com/watch?v=eBKho1HIWT4}
+  \item \url{https://www.youtube.com/watch?v=vXlNh9UHmXc}
+  \item[finne gammel verdi/prosentgrunnlag:] \url{https://www.youtube.com/watch?v=OILY0sPCHXs}
+  \item[finne gammel verdi/prosentgrunnlag:] \url{https://www.youtube.com/watch?v=7-eTUA8Zai8}
+  \item[finne gammel verdi/prosentgrunnlag:] \url{https://www.youtube.com/watch?v=WrTCbWKagiA}
+\end{description}
+
+\begin{Exercise}
+\textit{V}\newline
+Per liker å trene. Han betaler 450kr i måneden for et treningsstudio.
+I en vanlig måned trener han 25 ganger. Hvor mye betaler han per
+trening i en vanlig måned?
+\end{Exercise}
+
+\begin{Exercise}
+\textit{V}\newline
+  Toget mellom Bergen og Oslo kjører i følge \url{http://no.avstand.org/Bergen/Oslo}
+  482km på 6 timer og 40min. Hva er gjennomsnittshastigheten til toget?
+  \newline \it{HINT: }40min $ = $ 0.666... timer.
+\end{Exercise}
+
+\begin{Exercise}
+Jens gikk en tur på 2,5 km på 20 min.
+\begin{itemize}
+\item[\bf a)] Hvor mange minutter brukte Jens på én km?
+\item[\bf b)] Hvis han holder samme hastighet,
+hvor lang tid bruker han på å gå 3,4km ?
+\end{itemize}
+\end{Exercise}
+
+\begin{Exercise}
+En iskrem kommer i to forskjellige innpakninger.
+En koster 24,90kr for 240g, mens en annen koster 
+27,70 for 330g. Hvilken pakke lønner det seg å kjøpe?
+\end{Exercise}
+
+\begin{Exercise}
+En pakke med torsk på 675g fra produsenten ''Fuskeoppdrett AS''
+koster 114kr, mens en pakke på 520g fra produsenten ''Sjarkfisk''
+koster 90kr. Hvilken produsent har billigst fisk?
+\end{Exercise}
+
+\begin{Exercise}
+  I en kakeoppskrift trengs det 750g hvetemel til 6 egg.
+  Du har bare 2 egg på en søndag, men veldig lyst på kake.
+  Hvor mange gram hvetemel trengs det til en oppskrift på 2 egg?
+\end{Exercise}
+
+\begin{Exercise}
+  I en annen kakeoppskrift trengs det 1400g hvetemel til 7 egg.
+  Du har bare 3 egg på en søndag, men veldig lyst på kaken.
+  Hvor mange gram hvetemel trengs det til en oppskrift på 3 egg?
+\end{Exercise}
+
+\begin{Exercise}
+  I en brødoppskrift skal du bruke 850g sammalt hvete og
+  400g fint hvetemel. Desverre har du kun 250g fint hvetemel.
+  Hvor mye sammalt hvete skal du bruke?
+  \newline
+  \it{HINT: Regn ut hvor mye sammalt hvetemel du bruker per gram fint hvetemel.}
+\end{Exercise}
+
+\begin{Exercise}
+Din lokale klesforretning har en bukse på tilbud. Ordinær pris er
+420kr, og buksen er satt ned 25\%.
+\begin{itemize}
+\item[\bf a)] Hvor mye er én prosent av ordinær pris?
+\item[\bf b)] Hvor mange kroner utgjorde rabatten?
+\item[\bf c)] Hva var tilbudsprisen?
+\end{itemize}
+\end{Exercise}
+
+
+\begin{Exercise}
+Din lokale klesforretning har en skjorte på tilbud. Ordinær pris er
+540kr, og skjorta er satt ned 20\%.
+\begin{itemize}
+\item[\bf a)] Hvor mye er én prosent av ordinær pris?
+\item[\bf b)] Hvor mange kroner utgjorde rabatten?
+\item[\bf c)] Hva var tilbudsprisen?
+\end{itemize}
+\end{Exercise}
+
+\begin{Exercise}
+\textit{V}\newline
+  En sportsforretning har 30\% tilbud på fiskestenger. De koster nå 1330 kr.
+  \begin{description}
+    \item[a)] Forklar at tilbudsprisen utgjør 70\% av ordinær pris
+    \item[b)] Forklar at regnestykket \[ \frac{1330\text{kr}}{70} = 19\text{kr} \] forteller oss
+      hva 1\% av ordinær pris er.
+    \item[c)] Forklar at regnestykket \[\frac{1330\text{kr}}{70}\cdot100 = 19\text{kr}\cdot100 = 1900\text{kr} \]
+      forteller oss hva 100\% av ordinær pris er
+    \item[d)] Forklar at 100\% av ordinær pris er ordinær pris
+  \end{description}
+\end{Exercise}
+
+
+\begin{Exercise}
+Følg stegene i oppgaven over: \newline
+Din lokale klesforretning har en skjorte på tilbud. Tilbudspris er
+430kr, og skjorta er satt ned 20\% (av ordinær pris).
+\begin{itemize}
+\item[\bf a)] Forklar at tilbudsprisen utgjør 80\% av ordinær pris
+\item[\bf b)] Hvor mye er én prosent av ordinær pris? (gå veien om 1)
+\item[\bf c)] Hva var ordinær pris?
+\item[\bf d)] Hvor mange kroner utgjorde rabatten?
+\end{itemize}
+\end{Exercise}
+
+\begin{Exercise}
+\textit{V}\newline
+  En butikk har satt ned prisen på smågodt med 27\%. Nåprisen er 8kr/hg.
+\begin{description}
+\item[a)] Forklar at tilbudsprisen utgjør 73\% av ordinær pris
+\item[b)] Hvor mye er én prosent av ordinær pris? (gå veien om 1)
+\item[c)] Hva var ordinær pris?
+\item[d)] Hvor mange kroner utgjorde rabatten?
+\end{description}
+\end{Exercise}
+
+\begin{Exercise}
+\textit{V}\newline
+  Prisen på en vare har gått opp 2,5\% iløpet av et år. Nåprisen er 205kr..
+\begin{description}
+\item[a)] Forklar at nåprisen utgjør 102,5\% av prisen for ett år siden
+\item[b)] Hvor mye er én prosent av prisen for ett år siden? (gå veien om 1)
+\item[c)] Hva var prisen for ett år siden?
+\item[d)] Hvor stor er prisendringen i kroner?
+\end{description}
+\end{Exercise}
+
+\begin{Exercise}
+  Prisen på en vare har gått opp 5\% iløpet av et år. Nåprisen er 1750kr.
+\begin{description}
+\item[a)] Hva var prisen for ett år siden?
+\item[b)] Hvor stor er prisendringen i kroner?
+\end{description}
+\end{Exercise}
+
+\begin{Exercise}
+  En butikk har 25\% tilbud på en vare. Den selges nå til 500kr.
+\begin{description}
+\item[a)] Hva var ordinær pris?
+\item[b)] Hvor stor er rabatten i kroner?
+\end{description}
+\end{Exercise}
+
+\begin{Exercise}
+  Et selskap investerte 30\% av kontantbeholdningen sin i en maskin
+  som kostet 150000kr.
+  \begin{description}
+    \item[a)] Hvor stor var kontantbeholdningen før investeringen?
+    \item[b)] Hvor stor er kontantbeholdningen nå?
+  \end{description}
+\end{Exercise}
+
+
+\begin{Exercise}
+Per skal gå en tur på fjellet. Han har trent i lang tid, men på noe
+kortere turer. Han går 20km på 4 timer under treningsøktene.
+\begin{itemize}
+\item[\bf a)] Hvor lang tid bruker han på 35km med denne farta?
+\item[\bf b)] Per regner med å gå 7 timer hver dag mens han er i fjellet.
+Hvor langt går han hver dag hvis farten er som over?
+\end{itemize}
+\end{Exercise}
+
+
+\begin{Exercise}
+Petter skal male en vegg. Han bruker 5L maling på 7m$^2$. Hvor mye
+maling bruker han på vegg med areal 50m$^2$.
+\end{Exercise}
+
+\begin{Exercise}
+Gjør oppgavene 154, 156, og 157 side 238 i læreboken ''Matematikk 1P, Aschehoug ,2009''.
+\end{Exercise}
+
+
+\section*{Hjernetrim og repetisjon (frivillig)}
+\begin{Exercise}
+Fyll ut gangetabellen:
+\begin{align*}
+\begin{tabular}{| l | l | l | l | l | l | l | l | l | l | l | l | l | l |}
+\hline
+\ \cdot  & \;1\; & \;2\; & \;3\; & \;4\; & \;5\; & \;6\; & \;7\; & \;8\; & \;9\; & \;\;10 & \;\;11 & \;\; 12 & \;\; 13 \\   \hline
+\ 1      &   &   &   &   &   &                &   &      &     &   & &  &    \\   \hline
+\ 2      &   &   &   &   &   &                &   &      &     &   & &  &    \\   \hline
+\ 3      &   &   &   &   &   &                &   &      &     &   & &  &    \\   \hline
+\ 4      &   &   &   &   &   &                &   &      &     &   & &  &    \\   \hline
+\ 5      &   &   &   &   &   &                &   &      &     &   & &  &    \\   \hline
+\ 6      &   &   &   &   &   &                &   &      &     &   & &  &    \\   \hline
+\ 7      &   &   &   &   &   &                &   &      &     &   & &  &    \\   \hline
+\ 8      &   &   &   &   &   &                &   &      &     &   & &  &    \\   \hline
+\ 9      &   &   &   &   &   &                &   &      &     &   & &  &    \\   \hline
+\ 10     &   &   &   &   &   &                &   &      &     &   & &  &    \\   \hline
+\ 11     &   &   &   &   &   &                &   &      &     &   & &  &    \\   \hline
+\ 12     &   &   &   &   &   &                &   &      &     &   & &  &    \\   \hline
+\ 13     &   &   &   &   &   &                &   &      &     &   & &  &    \\   \hline
+\end{tabular}
+\end{align*}
+\end{Exercise}
+
+\begin{Exercise}
+Regn ut:
+\begin{description}
+\item[a)] \[\frac{5}{2} -2 + \frac{3}{7}\]
+\item[b)] \[\frac{5}{6} -5 + \frac{3}{4}\cdot4\]
+\item[c)] \[\frac{5}{3} +3 - \frac{3}{7}\cdot\frac{5}{4}\]
+\end{description}
+\end{Exercise}
+
+\begin{Exercise}
+Vis ved utregning at: \newline
+\begin{tabular}{l l l l}
+\textbf{a)} $(-3)^3 = -27$ &
+\textbf{b)} $(-3)^4 = 81$ &
+\textbf{c)} $-3^4 = -81$ &
+\textbf{d)} $(-2)^3 = -8$ \\
+\textbf{e)} $(-2)^4 = 16$ &
+\textbf{f)} $-2^4 = -16$ &
+\textbf{g)} $(-10)^2 = 100$ &
+\textbf{h)} $-10^2 = -100$
+\end{tabular}
+\end{Exercise}
+
+\begin{Exercise}
+Regn ut:
+\begin{description}
+\item[a)] $(7 - 8)^{10}$
+\item[b)] $(3 - 8)^3 + 5\cdot\sqrt{25}$
+\item[c)] $(2 - 4)^4 - 8:4 + 10$
+\item[d)] $(13 - 17)^3 + 20:5 + 7\cdot\sqrt{25}$
+\end{description}
+\end{Exercise}
+
+\begin{Exercise}
+Regn ut i hodet, og sjekk med digitalt verktøy: \newline
+\begin{tabular}{l l l l}
+\textbf{a)} $14\cdot 14$ &
+\textbf{b)} $15\cdot 15$ &
+\textbf{c)} $16\cdot 16$ &
+\textbf{d)} $17\cdot 17$ \\
+\textbf{e)} $18\cdot 18$ &
+\textbf{f)} $19\cdot 19$ &
+\textbf{g)} $21\cdot 21$ &
+\textbf{h)} $22\cdot 22$ &
+\end{tabular}
+\end{Exercise}
+
+
+
+
+
+
+\end{document}
