@@ -1,0 +1,401 @@
+\documentclass[a4, 11pt, twoside]{article}
+
+\usepackage{pstricks,pst-plot}
+\usepackage[utf8]{inputenc}
+\usepackage[english,norsk]{babel}
+
+\usepackage{ulem}
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xcolor}
+
+\usepackage{natbib}
+
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  %captionpos=b,                   % sets the caption-position to bottom
+  commentstyle=\color{blue},       % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{orange},       % keyword style
+  language=Python,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{violet},      % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+}
+
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+
+% This concludes the preamble
+
+\usepackage[colorlinks=true,citecolor=red]{hyperref}
+
+% \usepackage[norsk]{babel}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{makeidx}
+\usepackage{graphicx}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\usepackage{accents}
+\newcommand{\interior}[1]{\accentset{\smash{\raisebox{-0.12ex}{$\scriptstyle\circ$}}}{#1}\rule{0pt}{2.3ex}}
+\fboxrule0.0001pt \fboxsep0pt
+
+% used for diagrams, not needed here
+% \usepackage{tikz}
+% \usepackage{tikz-cd}
+% \usetikzlibrary{matrix, arrows, decorations}
+
+
+
+%%% New environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{eksempel}{Eksempel}
+\setcounter{eksempel}{0}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{nremark}[theorem]{Bemerkning}
+\newtheorem{advarsel}[theorem]{ADVARSEL}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{improvement}[theorem]{Improvement}
+\newtheorem{discus}[theorem]{Discus}
+\newtheorem{ptheorem}[theorem]{Possible Theorem}
+\newtheorem{project}[theorem]{Project}
+\newtheorem{solution}[theorem]{Solution}
+\newcommand\hra{\hookrightarrow}
+
+%%% Custom definitions and macros
+
+
+\DeclareMathOperator{\vspan}{Span}
+\renewcommand{\d}{\mathrm{\; d}} % for differensialet i integraler.
+
+\newcommand{\Aut}{\mathop{{\rm Aut}}}
+\newcommand{\End}{\mathop{{\rm End}}}
+\newcommand{\Hom}{\mathop{{\rm Hom}}}
+\newcommand{\rank}{\mathop{{\rm rank}}}
+\newcommand{\st}{\text{ s.t }}
+\renewcommand{\div}{\mathop{{\rm div}}}
+
+\DeclareMathOperator{\Dx}{\frac{\d}{\d x}}
+\DeclareMathOperator{\DDx}{\frac{\d^2}{\d x^2}}
+\DeclareMathOperator{\erf}{erf}
+\DeclareMathOperator{\erfc}{erfc}
+\DeclareMathOperator{\sign}{sgn}
+
+
+% Caligraphic letters
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cZ}{\mathcal{Z}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cW}{\mathcal{W}}
+
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\renewcommand{\H}{\mathbb{H}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\U}{\mathbb{U}}
+\newcommand{\bT}{\mathbb{T}}
+\newcommand{\bD}{\mathbb{D}}
+
+\newcommand{\vu}{\boldsymbol{u}}
+\newcommand{\vv}{\boldsymbol{v}}
+\newcommand{\vn}{\boldsymbol{n}}
+\newcommand{\vf}{\boldsymbol{f}}
+
+\def\di{\partial}
+\def\bs{\backslash}
+\def\e{\epsilon}
+\def\la{\langle}
+\def\ra{\rangle}
+
+
+
+\renewcommand{\d}{\;\text{d}}
+\newcommand{\ocM}{\overline{\mathcal{M}}^{+}}
+\newcommand{\ocB}{\overline{\mathcal{B}}}
+\newcommand{\ocA}{\overline{\mathcal{A}}}
+\newcommand{\Lp}{\text{L}}
+\newcommand{\aev}{\text{ a.e }}
+\newcommand{\aeev}{\text{-a.e }}
+
+\newcommand{\llra}{\xrightarrow{\hspace*{1cm}}}
+
+\DeclareMathOperator*{\supp}{supp}
+\DeclareMathOperator*{\essup}{essup}
+
+
+\fancyhead[LE, RO]{Vekstfaktor}
+\fancyhead[RE, LO]{Prosentregning}
+\setlength{\headheight}{14pt}
+
+\usepackage{exercise}
+\def\ExerciseName{Oppgave}
+
+\begin{document}
+
+
+
+\section{Kort hjernetrim}
+\begin{Exercise}
+  Et selskap gjør forsøk på en rekke datamaskiner. $\frac{3}{4}$ av datamaskinene
+  hadde feil og mangler. Av datamaskinene med feil og mangler var $\frac{1}{7}$ alvorlige.
+\begin{itemize}
+\item[\bf a)] Hvor mange prosent av datamaskinene hadde feil og mangler?
+\item[\bf b)] Hvor stor (total) andel av datamaskinene hadde alvorlige feil og mangler? Oppgi svaret som
+  brøk, prosent og desimaltall.
+\item[\bf c)] Hva vil du si er sannsynligheten for at en datamaskin hadde alvorlige feil og mangler?
+\end{itemize}
+\end{Exercise}
+
+
+\section{Vekstfaktor}
+\subsection*{Kort teori}
+En størrelse som øker med $p\%$ gir en vekstfaktor
+\[V = 1 + \frac{p}{100}. \]
+En størrelse som minker med $p\%$ gir en vekstfaktor
+\[V = 1 - \frac{p}{100} \]
+Tallet \[\frac{p}{100} \] kalles ofte \textbf{prosentfaktor}.
+\begin{eksempel}
+I 2008 var befolkningen i en kommune 22000. Fra 2008 til 2009 økte befolkningen
+med 5\%. Dette tilsvarer en vekstfaktor på 
+\[V = 1 + 0,05 = 1,05.\] I 2009 var da befolkningen gitt ved formelen
+\[ N = GV = 22000\cdot1,05 = 23100 \]
+\end{eksempel}
+
+\begin{eksempel}
+  En vare på 340kr går ned 20\%. Siden 20\% som desimaltall er 0,20, 
+  får vi en vekstfaktor på
+  1 - 0,20 = 0,80.
+  Den nye prisen blir da \[N = GV = 340\text{kr}\cdot0,80 = 272\text{kr}. \]
+  I formelen \[N = GV \] er $N$ ny verdi, $G$ er gammel verdi (altså grunnverdi),
+  og $V$ er vekstfaktoren.
+\end{eksempel}
+
+\begin{Exercise}
+Fyll inn det som mangler.
+\newline
+\begin{center}
+\begin{tabular}{| l | l |}
+\hline
+\textbf{Endring i prosent} & \textbf{Vekstfaktor} \\ \hline  
++ 5\%                      & 1,05                 \\ \hline 
+- 7\%                      & 0,93                 \\ \hline 
++ 7,6\%                    & 1,076                \\ \hline 
++ 7\%                      &                      \\ \hline 
++ 7,5\%                    &                      \\ \hline 
++ 17\%                     &                      \\ \hline 
+- 37\%                     &                      \\ \hline 
+                           & 0,80                 \\ \hline 
+                           & 1,345                \\ \hline 
+                           & 0,782                \\ \hline 
+                           & 0,759                \\ \hline 
+                           & 2,67                 \\ \hline 
+                           & 3,345                 \\ \hline 
+                           & 1,231                 \\ \hline 
+0,5\%                      &                      \\ \hline
+                           & 1,005                 \\ \hline 
+\end{tabular}
+\end{center}
+\end{Exercise}
+
+\begin{Exercise}\label{anbefalt3}
+Lise kjøpte en jakke på 20\% avslag og betalte 1750kr.
+Hva kostet jakken opprinnelig? Gi to løsningsmåter, en med
+veien om 1, og en med vekstfaktor.
+\end{Exercise}
+
+\begin{Exercise}
+\textit{V}\newline
+  En vare kostet opprinnelig 1200kr, og ble satt ned 20\%. 
+\begin{description}
+  \item[a)] Hva er vekstfaktoren?
+  \item[b)] Hva er gammel (ordinær) pris ?
+  \item[c)] Forklar hva de ulike størrelsene betyr i formelen \[N = GV.\]
+  \item[d)] Sett opplysningene du har inn i formelen over, og regn ut ny verdi.
+\end{description}
+\end{Exercise}
+
+\begin{Exercise}
+Vekstfaktorene for prisen på en vare er listet opp
+i tabellen under. \newline
+\begin{center}
+\begin{tabular}{| l | l | l | l | l | l | l | l |}
+\hline
+2008 & 2009   & 2010   & 2011   & 2012   & 2013   & 2014   & 2015 \\ \hline
+1,03 & 1,0255 & 1,024 & 1,02   & 1,035  & 1,027   & 0,978  & 1,01 \\ \hline
+\end{tabular}
+\end{center}
+\begin{description}
+\item[a)] Hva forteller tabellen deg om de årlige prisendringene i prosent?
+\item[b)] Hvis varen kostet 50kr i begynnelsen av 2008, 
+hvor mange prosent endret varen seg totalt? 
+\item[c)] Hva er produktet av vekstfaktorene? Hvilken prosentivs vekst
+svarer den til?
+\item[d)] Sammenlign svarene i b) og c), og gi en tolkning eller forklaring
+av fenomenet.
+\end{description}
+\end{Exercise}
+
+\begin{Exercise}
+  En vare gikk ned fra 3600kr til 2950kr.
+  \begin{description}
+    \item[a)] Sett opp formelen som beskriver sammenhengen mellom ny og gammel pris vha vekstfaktoren.
+    \item[b)] Sett inn opplysningene du har inn i formelen over.
+    \item[c)] Løs likningen du får.
+    \item[d)] Hva er vekstfaktoren?
+    \item[e)] Hvor mange prosent gikk prisen ned med ?
+  \end{description}
+\end{Exercise}
+
+\begin{eksempel}[Finne gammel verdi:]
+Jens kjøpte en bruktbil, og betalte 150000. Han regnet med at bilen har sunket
+45\% i pris siden den var ny. Dette tilsvarer en vekstfaktor på $1 - 0,45 = 0,55$.
+For å regne ut gammel pris setter vi dette inn i formelen
+\begin{align*}
+  N & = GV \\
+  150000\text{kr} & = G\cdot0,55     \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{   setter inn $ N = 150000$kr og $V = 0,55$ } \\
+  G & = \frac{150000\text{kr}}{0,55} \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{deler på $0,55$ på hver side } \\
+  G & = 272727\text{kr}
+\end{align*}
+\end{eksempel}
+
+\begin{Exercise}
+  En vare med ordinær pris 5000kr gikk ned 30\%. Bruk vekstfaktor og regn ut ny pris.
+\end{Exercise}
+
+\begin{Exercise}
+  En vare med ordinær pris 5000kr gikk ned 30\%. Bruk vekstfaktor og regn ut ny pris.
+\end{Exercise}
+
+
+\begin{Exercise}
+  Petter betalte 1500 kr for en vare på 33\% tilbud. 
+  \begin{description}
+    \item[a)] Bruk veien om 1 til å regne ut ordinær pris
+    \item[b)] Bruk vekstfaktor til å regne ut ordinær pris
+  \end{description}
+\end{Exercise}
+
+
+\begin{Exercise}
+  Petter betalte 1230 kr for en vare på 25\% tilbud. 
+  \begin{description}
+    \item[a)] Bruk veien om 1 til å regne ut ordinær pris
+    \item[b)] Bruk vekstfaktor til å regne ut ordinær pris
+    \item[c)] Hvilken måte er enklest (minst regning) ?
+  \end{description}
+\end{Exercise}
+
+
+
+\begin{Exercise}
+  Petter betalte 1230 kr for en vare på 25\% tilbud. 
+  \begin{description}
+    \item[a)] Bruk veien om 1 til å regne ut ordinær pris
+    \item[b)] Bruk vekstfaktor til å regne ut ordinær pris
+    \item[c)] Hvilken måte er enklest (minst regning) ?
+  \end{description}
+\end{Exercise}
+
+
+\begin{Exercise}
+  En vare gikk ned fra 2345kr til 1650kr.
+  Hvor mange prosent gikk varen ned med? (Bruk vekstfaktor)
+\end{Exercise}
+
+\begin{Exercise}
+  En vare på 530kr gikk først opp 10\% og deretter 25\%.
+  \begin{description}
+    \item[a)] Hva er vekstfaktoren for hver av prisendringene ?
+    \item[b)] Hva er ny pris?
+    \item[c)] Hvor mange prosent gikk varen opp med totalt ?
+    \item[d)] Hva er produktet av vekstfaktorene, hvor mange prosent oppgang i prisen tilsvarer dette produktet? Sammenlign
+      med svaret i c)
+  \end{description}
+\end{Exercise}
+
+
+\begin{Exercise}
+Prisen på en vare gikk først opp 10\% og deretter 25\%.
+  \begin{description}
+    \item[a)] Hva er vekstfaktoren for hver av prisendringene ?
+    \item[b)] Hvor mange prosent gikk varen opp med totalt ?
+  \end{description}
+\end{Exercise}
+
+
+\begin{Exercise}
+  En gikk først opp 12,5\% så 20\% og deretter ned 5\%.
+  \begin{description}
+    \item[a)] Hva er vekstfaktoren for hver av prisendringene ?
+    \item[b)] Hvor mange prosent gikk varen opp eller ned med totalt ?
+  \end{description}
+\end{Exercise}
+
+\begin{Exercise}
+\begin{description}
+\item[a)] Jens har spart i aksjer i 10 år. Han har hatt en årlig avkastning
+på 15\%. Hvor stor har avkastningen vært totalt ?
+\item[b)] Anta at han nå har 500 000 kr. Hvor mange kroner hadde Jens når
+han begynte å spare ?
+\item[c)] Hva hvis han haddde 5 000 000 kr ?
+\end{description}
+\end{Exercise}
+
+
+
+
+\end{document}
+
+
