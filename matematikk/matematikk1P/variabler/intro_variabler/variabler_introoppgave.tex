@@ -1,0 +1,222 @@
+\documentclass[a4, 11pt, twoside]{article}
+
+\usepackage{pstricks,pst-plot}
+\usepackage[utf8]{inputenc}
+\usepackage[english,norsk]{babel}
+
+\usepackage{ulem}
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xcolor}
+
+\usepackage{natbib}
+
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  %captionpos=b,                   % sets the caption-position to bottom
+  commentstyle=\color{blue},       % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{orange},       % keyword style
+  language=Python,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{violet},      % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+}
+
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+
+% This concludes the preamble
+
+\usepackage[colorlinks=true,citecolor=red]{hyperref}
+
+% \usepackage[norsk]{babel}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{makeidx}
+\usepackage{graphicx}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\usepackage{accents}
+\newcommand{\interior}[1]{\accentset{\smash{\raisebox{-0.12ex}{$\scriptstyle\circ$}}}{#1}\rule{0pt}{2.3ex}}
+\fboxrule0.0001pt \fboxsep0pt
+
+% used for diagrams, not needed here
+% \usepackage{tikz}
+% \usepackage{tikz-cd}
+% \usetikzlibrary{matrix, arrows, decorations}
+
+
+
+%%% New environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{eksempel}{Eksempel}
+\setcounter{eksempel}{0}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{nremark}[theorem]{Bemerkning}
+\newtheorem{advarsel}[theorem]{ADVARSEL}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{improvement}[theorem]{Improvement}
+\newtheorem{discus}[theorem]{Discus}
+\newtheorem{ptheorem}[theorem]{Possible Theorem}
+\newtheorem{project}[theorem]{Project}
+\newtheorem{solution}[theorem]{Solution}
+\newcommand\hra{\hookrightarrow}
+
+%%% Custom definitions and macros
+
+
+\DeclareMathOperator{\vspan}{Span}
+\renewcommand{\d}{\mathrm{\; d}} % for differensialet i integraler.
+
+\newcommand{\Aut}{\mathop{{\rm Aut}}}
+\newcommand{\End}{\mathop{{\rm End}}}
+\newcommand{\Hom}{\mathop{{\rm Hom}}}
+\newcommand{\rank}{\mathop{{\rm rank}}}
+\newcommand{\st}{\text{ s.t }}
+\renewcommand{\div}{\mathop{{\rm div}}}
+
+\DeclareMathOperator{\Dx}{\frac{\d}{\d x}}
+\DeclareMathOperator{\DDx}{\frac{\d^2}{\d x^2}}
+\DeclareMathOperator{\erf}{erf}
+\DeclareMathOperator{\erfc}{erfc}
+\DeclareMathOperator{\sign}{sgn}
+
+
+% Caligraphic letters
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cZ}{\mathcal{Z}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cW}{\mathcal{W}}
+
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\renewcommand{\H}{\mathbb{H}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\U}{\mathbb{U}}
+\newcommand{\bT}{\mathbb{T}}
+\newcommand{\bD}{\mathbb{D}}
+
+\newcommand{\vu}{\boldsymbol{u}}
+\newcommand{\vv}{\boldsymbol{v}}
+\newcommand{\vn}{\boldsymbol{n}}
+\newcommand{\vf}{\boldsymbol{f}}
+
+\def\di{\partial}
+\def\bs{\backslash}
+\def\e{\epsilon}
+\def\la{\langle}
+\def\ra{\rangle}
+
+
+
+\renewcommand{\d}{\;\text{d}}
+\newcommand{\ocM}{\overline{\mathcal{M}}^{+}}
+\newcommand{\ocB}{\overline{\mathcal{B}}}
+\newcommand{\ocA}{\overline{\mathcal{A}}}
+\newcommand{\Lp}{\text{L}}
+\newcommand{\aev}{\text{ a.e }}
+\newcommand{\aeev}{\text{-a.e }}
+
+\newcommand{\llra}{\xrightarrow{\hspace*{1cm}}}
+
+\DeclareMathOperator*{\supp}{supp}
+\DeclareMathOperator*{\essup}{essup}
+
+
+\fancyhead[LE, RO]{Variabler}
+\fancyhead[RE, LO]{Algebra}
+\setlength{\headheight}{14pt}
+
+\usepackage{exercise}
+\def\ExerciseName{Oppgave}
+
+\begin{document}
+
+
+\begin{Exercise}
+Anne selger strikkede votter.
+\begin{itemize}
+\item Vurder hvor mye hun kan tjene dersom hun selger 10, 20, eller 100 votter
+\item Eksperimenter med forskjellige priser på vottene
+\item Kan du lage en generell sammenheng ?
+\end{itemize}
+Utfordring: Dersom man produserer svært mange votter, må prisen på vottene ned.
+Hvordan påvirker dette eventuelt inntjening ?
+\end{Exercise}
+
+
+\begin{Exercise}
+Firmaet Mye Overtid har følgende lønningsliste på en
+avdeling.
+\begin{center}
+\begin{tabular}{| l | l | l |}
+\hline
+\textbf{Ansatt} & \textbf{Antall timer} \\ \hline % & \textbf{ekstra prosentsats for timer over 37,5t} \\ \hline
+Karoline        & 43,5                  \\ \hline  % & 50\% \\ \hline
+Jens            & 40                    \\ \hline  % & 50\% \\ \hline
+Anne            & 70,5                  \\ \hline  % & 50\% \\ \hline
+\end{tabular}
+\end{center}
+Vurder med en matematisk beskrivelse hvor mye firmaet totalt må betale i lønn på
+denne avdelingen. Hvordan vil du ta med overtid når normal arbeidsuke er 37,5 timer ?
+\end{Exercise}
+
+\begin{Exercise}
+Kan du tenke deg andre situasjoner der det er kjekt å bruke variabler! Hvis ja, hvilke, og
+hvordan vil du beskrive dem matematisk ?
+\end{Exercise}
+
+\end{document}
+
