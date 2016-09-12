@@ -1,0 +1,186 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[norsk]{babel}
+
+\usepackage{qtree}
+
+\usepackage{amsmath, amssymb}
+\usepackage[misc]{ifsym}
+%%% New environments
+
+%\newtheorem{theorem}{Theorem}[section]
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{prop}[theorem]{Proposition}
+
+\newtheorem{teorem}{Teorem}[section]
+\newtheorem{nlemma}[theorem]{Lemma}
+\newtheorem{korollar}[theorem]{Korollar}
+\newtheorem{setn}[theorem]{Setning}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{ndefn}[theorem]{Definisjon}
+%\newtheorem{example}[theorem]{Example} \newtheorem{eksempel}[theorem]{Eksempel}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{nremark}[theorem]{Bemerkning}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{improvement}[theorem]{Improvement}
+\newtheorem{discus}[theorem]{Discus}
+\newtheorem{ptheorem}[theorem]{Possible Theorem}
+\newtheorem{project}[theorem]{Project}
+%\newtheorem{solution}[theorem]{Solution}
+
+\title{Potensregning}
+\subtitle{Introduksjon - hva er en potens?}
+\date{\today}
+\subject{Mathematics}
+
+%\usetheme{Warsaw}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+%\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{boxes}
+%\usetheme{default}
+%\usetheme{CambridgeUS}
+
+\begin{document}
+
+\frame{\titlepage}
+
+
+\section{Potenser}
+
+\begin{frame}
+\frametitle{Eksempel: Grunntall og eksponent}
+\huge\[2^3 = 2\cdot2\cdot2 \]
+\normalsize
+Viktige begreper
+\begin{itemize}
+\item<2-> Grunntall: 2
+\item<3-> Eksponent: 3
+\item<4-> Merk forskjell på $\displaystyle 2^3$ og $\displaystyle 2\cdot3$
+\item<5->
+Oppgave: Regn ut:
+\begin{center}
+\begin{tabular}{l l l l l l}
+\textbf{a)} $2^4$ &
+\textbf{b)} $3^2$ &
+\textbf{c)} $3^3$ &
+\textbf{d)} $6^2$
+\end{tabular}
+\end{center}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Hva er grunntallet, og hva er eksponenten?}
+Oppgave: Hva blir fortegnet ? 
+\huge\[5^2 = ... \]
+\huge\[(-5)^2 = ... \]
+\huge\[-5^2 = ... \]
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Hva blir fortegnet ?}
+Oppgave: 
+\huge\[-(-5)^3 = ... \]
+\end{frame}
+
+\begin{frame}
+\frametitle{Eksempel: Negative grunntall}
+\huge\[(-2)^3 = (-2)\cdot(-2)\cdot(-2) = ... \]
+\huge\[(-2)^4 = (-2)\cdot(-2)\cdot(-2)\cdot(-2) = ... \]
+\normalsize
+\begin{itemize}
+\item<2-> Kan dere på forhånd si om en potens med negativt grunntall blir positiv eller negativ ?
+\item<3-> Oppgave: Regn ut:
+\begin{center}
+\begin{tabular}{l l l l l}
+\textbf{a)} $(-3)^2$ &
+\textbf{b)} $(-3)^3$ &
+\textbf{c)} $(-6)^2$ &
+\textbf{d)} $(-6)^3$
+\end{tabular}
+\end{center}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Eksempel: vanlige misforståelser}
+Hva blir:
+\huge
+\begin{align*}
+ (-2)^4 = &\\
+ -2^4 = & \\
+ (-2)^3 = &\\
+ -(-2)^3 = &
+\end{align*}
+\normalsize
+\end{frame}
+
+\begin{frame}
+\frametitle{Skrive tall som potens}
+Skriv som potens med 2 som grunntall:
+\begin{align*}
+\textbf{a) } 4   & \\ \\
+\textbf{b) } 8   & \\ \\
+\textbf{c) } 64  &
+\end{align*}
+\end{frame}
+
+\begin{frame}
+\frametitle{Oppgave: Regn ut}
+\huge
+\begin{align*}
+\textbf{a) } 3\cdot(5 - 9)^3 + 5^2 = &\\ \\
+\textbf{b) } 50 - 3\cdot(5 - 7)^3 - 5^2 = & \\ \\
+\textbf{c) } 50 - 4\cdot(5 - 7)^3 - (-5)^2 = &
+\end{align*}
+\normalsize
+\end{frame}
+
+\begin{frame}
+Hvordan kan dere skrive dette som en potens med ett grunntall?
+\huge\[3^4\cdot3^2\]
+\huge\[3^{2012}\cdot3^4\]
+\end{frame}
+
+\begin{frame}
+\frametitle{Kontrollspørsmål}
+Skriv som en toerpotens:
+\huge\[2^4\cdot2^2\]
+\huge\[2^{2012}\cdot2^4\]
+\end{frame}
+
+\begin{frame}
+Hvordan kan dere skrive dette som et produkt av to potenser ?
+\huge\[(6\cdot5)^3\]
+\huge\[(6\cdot5)^{2016}\]
+\huge\[(a\cdot b)^{n}\]
+\end{frame}
+
+\end{document}
