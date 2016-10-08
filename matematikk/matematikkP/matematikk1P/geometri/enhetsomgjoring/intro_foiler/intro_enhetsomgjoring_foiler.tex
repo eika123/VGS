@@ -1,0 +1,633 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[norsk]{babel}
+
+\usepackage{qtree}
+
+\usepackage{tikz}
+\usetikzlibrary{fit, arrows.meta}
+
+\definecolor{myorange}{RGB}{206,103,44}
+\definecolor{myred}{RGB}{176,24,43}
+\definecolor{mybg}{RGB}{166,161,121}
+
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{backgroundii}
+\pgfsetlayers{backgroundii,background,main}
+
+\usepackage{amsmath, amssymb}
+\usepackage[misc]{ifsym}
+%%% New environments
+
+%\newtheorem{theorem}{Theorem}[section]
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{prop}[theorem]{Proposition}
+
+\newtheorem{teorem}{Teorem}[section]
+\newtheorem{nlemma}[theorem]{Lemma}
+\newtheorem{korollar}[theorem]{Korollar}
+\newtheorem{setn}[theorem]{Setning}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{ndefn}[theorem]{Definisjon}
+%\newtheorem{example}[theorem]{Example} \newtheorem{eksempel}[theorem]{Eksempel}
+\newtheorem{eksempelx}{Eksempel}
+\newenvironment{eksempel}
+   {\pushQED{\qed}\renewcommand{\qedsymbol}{%\textbf{eksempel slutt:}
+   $\clubsuit$}\eksempelx}
+   {\popQED\endeksempelx}
+\setcounter{eksempel}{0}
+
+
+\newtheorem{oppgave}{Oppgave}
+\setcounter{oppgave}{0}
+
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{nremark}[theorem]{Bemerkning}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{improvement}[theorem]{Improvement}
+\newtheorem{discus}[theorem]{Discus}
+\newtheorem{ptheorem}[theorem]{Possible Theorem}
+\newtheorem{project}[theorem]{Project}
+%\newtheorem{solution}[theorem]{Solution}
+
+
+%\usetheme{Warsaw}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+%\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{boxes}
+%\usetheme{default}
+%\usetheme{CambridgeUS}
+
+% Caligraphic letters
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cZ}{\mathcal{Z}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cW}{\mathcal{W}}
+
+
+\tikzset{
+  hpil/.style={
+          ->,
+          thick,
+          shorten <=2pt,
+          shorten =>2pt,}
+}
+\tikzset{
+  vpil/.style={
+          <-,
+          thick,
+          shorten =>2pt,}
+}
+
+
+
+\title{Lengde-enheter}
+\date{\today}
+\subject{Mathematics}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+    \frametitle{Mål}
+    Læreplanmål i geometri: Mål for opplæringa er at eleven skal kunne:
+    \begin{itemize}
+        \item \textit{Rekne med ulike måleeiningar, bruke ulike målereiskaper, vurdere kva for målereiskaper
+            som er formålstenlege}, og vurdere kor usikre målingane er.
+    \end{itemize}
+    Timens læringsmål:
+    \begin{itemize}
+        \item Kunne gjøre om mellom ulike metriske lengdeenheter
+        \item Kunne vurdere hvilken metrisk måleenhet som er passende (formålstenleg).
+        \item Kunne gjøre om mellom metriske og ikke-metriske lengdeenheter.
+    \end{itemize}
+        
+\end{frame}
+
+
+\section{Lengdeenheter: Meteren}
+
+%\begin{frame}
+%\frametitle{Hvor finner vi forholdstall}
+%Eksempler på forholdstall
+%\begin{itemize}
+%\item<2-> Kilopris, literpris, (kroner \textbf{per} kilogram, kroner \textbf{per} liter)
+%\item<3-> Blande saft (råsaft \textbf{per} liter, en \textit{ konsentrasjon })
+%\item<4-> Trykk (kraft \textbf{per} kvadratmeter)
+%\item<5-> kronekurs (veksle penger: euro \textbf{per} krone, kroner \textbf{per} euro)
+%\item<6-> Trafikk\textbf{tetthet}: kjøretøy  \textbf{per} time.
+%\item<7-> Masse\textbf{tetthet}: kilogram \textbf{per} kubikkmeter
+%\item<8-> Baking: dL mel  \textbf{per} dL melk
+%\item<9-> Hastighet: meter \textbf{per} sekund
+%\item<10-> Kan du finne flere eksempler ?
+%\end{itemize}
+%\end{frame}
+
+
+
+%\begin{frame}
+%\frametitle{Meteren: visualisering av oppdeling}
+%\begin{center}
+%\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=6cm,y=1cm]
+%\draw (0, 0) -- (1.0, 0);
+%
+%\foreach \x in {0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1},
+%\pgfmathsetmacro\result{\x*10}
+%    \draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt) node[below] {\tiny$\pgfmathprintnumber{\result}$dm};
+%
+%\foreach \x in {0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1,
+%                0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2,
+%                0.21, 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29, 0.3, 
+%                0.31, 0.32, 0.33, 0.34, 0.35, 0.36, 0.37, 0.38, 0.39, 0.3, 
+%                0.41, 0.42, 0.43, 0.44, 0.45, 0.46, 0.47, 0.48, 0.49, 0.4, 
+%                0.51, 0.52, 0.53, 0.54, 0.55, 0.56, 0.57, 0.58, 0.59, 0.5, 
+%                0.61, 0.62, 0.63, 0.64, 0.65, 0.66, 0.67, 0.68, 0.69, 0.6, 
+%                0.71, 0.72, 0.73, 0.74, 0.75, 0.76, 0.77, 0.78, 0.79, 0.7, 
+%                0.81, 0.82, 0.83, 0.84, 0.85, 0.86, 0.87, 0.88, 0.89, 0.9, 
+%                0.91, 0.92, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98, 0.99, 1 }
+%\draw[shift={(\x,0)},color=black] (0pt,1pt) -- (0pt,-1pt);
+%
+%
+%\end{tikzpicture}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}
+%\frametitle{Meteren: visualisering av oppdeling}
+%\begin{center}
+%\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=6cm,y=1cm]
+%\draw (0, 0) -- (1.0, 0);
+%
+%
+%\foreach \x in {0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1},
+%\pgfmathsetmacro\result{\x*10}
+%    \draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt) node[below] {\tiny$\pgfmathprintnumber{\result}$dm};
+%
+%\foreach \x in {0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1,
+%                0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2,
+%                0.21, 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29, 0.3, 
+%                0.31, 0.32, 0.33, 0.34, 0.35, 0.36, 0.37, 0.38, 0.39, 0.3, 
+%                0.41, 0.42, 0.43, 0.44, 0.45, 0.46, 0.47, 0.48, 0.49, 0.4, 
+%                0.51, 0.52, 0.53, 0.54, 0.55, 0.56, 0.57, 0.58, 0.59, 0.5, 
+%                0.61, 0.62, 0.63, 0.64, 0.65, 0.66, 0.67, 0.68, 0.69, 0.6, 
+%                0.71, 0.72, 0.73, 0.74, 0.75, 0.76, 0.77, 0.78, 0.79, 0.7, 
+%                0.81, 0.82, 0.83, 0.84, 0.85, 0.86, 0.87, 0.88, 0.89, 0.9, 
+%                0.91, 0.92, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98, 0.99, 1 }
+%\draw[shift={(\x,0)},color=black] (0pt,1pt) -- (0pt,-1pt);
+%
+%    \draw[color=red] (0.05, 0) circle (0.3cm);
+%
+%\end{tikzpicture}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}
+%\frametitle{Meteren: visualisering av oppdeling}
+%\begin{center}
+%\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=6cm,y=1cm]
+%\draw (0, 0) -- (1.0, 0);
+%
+%\foreach \x in {0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1},
+%\pgfmathsetmacro\result{\x*10}
+%    \draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt) node[below] {\tiny$\pgfmathprintnumber{\result}$dm};
+%
+%\foreach \x in {0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1,
+%                0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2,
+%                0.21, 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29, 0.3, 
+%                0.31, 0.32, 0.33, 0.34, 0.35, 0.36, 0.37, 0.38, 0.39, 0.3, 
+%                0.41, 0.42, 0.43, 0.44, 0.45, 0.46, 0.47, 0.48, 0.49, 0.4, 
+%                0.51, 0.52, 0.53, 0.54, 0.55, 0.56, 0.57, 0.58, 0.59, 0.5, 
+%                0.61, 0.62, 0.63, 0.64, 0.65, 0.66, 0.67, 0.68, 0.69, 0.6, 
+%                0.71, 0.72, 0.73, 0.74, 0.75, 0.76, 0.77, 0.78, 0.79, 0.7, 
+%                0.81, 0.82, 0.83, 0.84, 0.85, 0.86, 0.87, 0.88, 0.89, 0.9, 
+%                0.91, 0.92, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98, 0.99, 1 }
+%\draw[shift={(\x,0)},color=black] (0pt,1pt) -- (0pt,-1pt);
+%
+%    \draw[color=red] (0.05, 0) circle (0.3cm);
+%
+%
+%\draw (0, -1.5) -- (1.0, -1.5);
+%
+%\draw[color=red] (0,0) -- (0, -1.5);
+%\draw[color=red] (0.1, 0) -- (1, -1.5);
+%
+%\foreach \x in {0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1}
+%\pgfmathsetmacro\result{\x*10}
+%    \draw[shift={(\x,-1.5)},color=black] (0pt,2pt) -- (0pt,-2pt) node[below] {\tiny$\pgfmathprintnumber{\result}$cm};
+%
+%\end{tikzpicture}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}
+%\frametitle{Meteren: visualisering av oppdeling}
+%\begin{center}
+%\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=6cm,y=1cm]
+%\draw (0, 0) -- (1.0, 0);
+%
+%\foreach \x in {0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1},
+%\pgfmathsetmacro\result{\x*10}
+%    \draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt) node[below] {\tiny$\pgfmathprintnumber{\result}$dm};
+%
+%\foreach \x in {0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1,
+%                0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2,
+%                0.21, 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29, 0.3, 
+%                0.31, 0.32, 0.33, 0.34, 0.35, 0.36, 0.37, 0.38, 0.39, 0.3, 
+%                0.41, 0.42, 0.43, 0.44, 0.45, 0.46, 0.47, 0.48, 0.49, 0.4, 
+%                0.51, 0.52, 0.53, 0.54, 0.55, 0.56, 0.57, 0.58, 0.59, 0.5, 
+%                0.61, 0.62, 0.63, 0.64, 0.65, 0.66, 0.67, 0.68, 0.69, 0.6, 
+%                0.71, 0.72, 0.73, 0.74, 0.75, 0.76, 0.77, 0.78, 0.79, 0.7, 
+%                0.81, 0.82, 0.83, 0.84, 0.85, 0.86, 0.87, 0.88, 0.89, 0.9, 
+%                0.91, 0.92, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98, 0.99, 1 }
+%\draw[shift={(\x,0)},color=black] (0pt,1pt) -- (0pt,-1pt);
+%
+%    \draw[color=red] (0.05, 0) circle (0.3cm);
+%
+%
+%\draw (0, -1.5) -- (1.0, -1.5);
+%
+%\draw[color=red] (0,0) -- (0, -1.5);
+%\draw[color=red] (0.1, 0) -- (1, -1.5);
+%
+%\foreach \x in {0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1}
+%\pgfmathsetmacro\result{\x*10}
+%    \draw[shift={(\x,-1.5)},color=black] (0pt,2pt) -- (0pt,-2pt) node[below] {\tiny$\pgfmathprintnumber{\result}$cm};
+%
+%
+%\foreach \z in {0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1,
+%                   0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2,
+%                   0.21, 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29, 0.3, 
+%                   0.31, 0.32, 0.33, 0.34, 0.35, 0.36, 0.37, 0.38, 0.39, 0.3, 
+%                   0.41, 0.42, 0.43, 0.44, 0.45, 0.46, 0.47, 0.48, 0.49, 0.4, 
+%                   0.51, 0.52, 0.53, 0.54, 0.55, 0.56, 0.57, 0.58, 0.59, 0.5, 
+%                   0.61, 0.62, 0.63, 0.64, 0.65, 0.66, 0.67, 0.68, 0.69, 0.6, 
+%                   0.71, 0.72, 0.73, 0.74, 0.75, 0.76, 0.77, 0.78, 0.79, 0.7, 
+%                   0.81, 0.82, 0.83, 0.84, 0.85, 0.86, 0.87, 0.88, 0.89, 0.9, 
+%                   0.91, 0.92, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98, 0.99, 1 }
+%\draw[shift={(\z, -1.5)},color=black] (0pt,1pt) -- (0pt,-1pt);
+%
+%\end{tikzpicture}
+%\end{center}
+%\end{frame}
+%
+%
+%\begin{frame}
+%\frametitle{Meteren: visualisering av oppdeling}
+%\begin{center}
+%\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=6cm,y=1cm]
+%\draw (0, 0) -- (1.0, 0);
+%
+%\foreach \x in {0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1},
+%\pgfmathsetmacro\result{\x*10}
+%    \draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt) node[below] {\tiny$\pgfmathprintnumber{\result}$dm};
+%
+%\foreach \x in {0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1,
+%                0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2,
+%                0.21, 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29, 0.3, 
+%                0.31, 0.32, 0.33, 0.34, 0.35, 0.36, 0.37, 0.38, 0.39, 0.3, 
+%                0.41, 0.42, 0.43, 0.44, 0.45, 0.46, 0.47, 0.48, 0.49, 0.4, 
+%                0.51, 0.52, 0.53, 0.54, 0.55, 0.56, 0.57, 0.58, 0.59, 0.5, 
+%                0.61, 0.62, 0.63, 0.64, 0.65, 0.66, 0.67, 0.68, 0.69, 0.6, 
+%                0.71, 0.72, 0.73, 0.74, 0.75, 0.76, 0.77, 0.78, 0.79, 0.7, 
+%                0.81, 0.82, 0.83, 0.84, 0.85, 0.86, 0.87, 0.88, 0.89, 0.9, 
+%                0.91, 0.92, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98, 0.99, 1 }
+%\draw[shift={(\x,0)},color=black] (0pt,1pt) -- (0pt,-1pt);
+%
+%    \draw[color=red] (0.05, 0) circle (0.3cm);
+%
+%
+%\draw (0, -1.5) -- (1.0, -1.5);
+%
+%\draw[color=red] (0,0) -- (0, -1.5);
+%\draw[color=red] (0.1, 0) -- (1, -1.5);
+%
+%\foreach \x in {0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1}
+%\pgfmathsetmacro\result{\x*10}
+%    \draw[shift={(\x,-1.5)},color=black] (0pt,2pt) -- (0pt,-2pt) node[below] {\tiny$\pgfmathprintnumber{\result}$cm};
+%
+%
+%\foreach \z in {0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1,
+%                   0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2,
+%                   0.21, 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29, 0.3, 
+%                   0.31, 0.32, 0.33, 0.34, 0.35, 0.36, 0.37, 0.38, 0.39, 0.3, 
+%                   0.41, 0.42, 0.43, 0.44, 0.45, 0.46, 0.47, 0.48, 0.49, 0.4, 
+%                   0.51, 0.52, 0.53, 0.54, 0.55, 0.56, 0.57, 0.58, 0.59, 0.5, 
+%                   0.61, 0.62, 0.63, 0.64, 0.65, 0.66, 0.67, 0.68, 0.69, 0.6, 
+%                   0.71, 0.72, 0.73, 0.74, 0.75, 0.76, 0.77, 0.78, 0.79, 0.7, 
+%                   0.81, 0.82, 0.83, 0.84, 0.85, 0.86, 0.87, 0.88, 0.89, 0.9, 
+%                   0.91, 0.92, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98, 0.99, 1 }
+%\draw[shift={(\z, -1.5)},color=black] (0pt,1pt) -- (0pt,-1pt);
+%
+%
+%\draw[color=red] (0.05, -1.5) circle (0.3cm);
+%
+%\end{tikzpicture}
+%\end{center}
+%\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Meteren: visualisering av oppdeling}
+\begin{center}
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=6cm,y=1cm]
+\draw (0, 0) -- (1.0, 0);
+
+\foreach \x in {0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1},
+\pgfmathsetmacro\result{\x*10}
+    \draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt) node[below] {\tiny$\pgfmathprintnumber{\result}$dm};
+
+\pause
+
+\foreach \x in {0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1,
+                0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2,
+                0.21, 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29, 0.3, 
+                0.31, 0.32, 0.33, 0.34, 0.35, 0.36, 0.37, 0.38, 0.39, 0.3, 
+                0.41, 0.42, 0.43, 0.44, 0.45, 0.46, 0.47, 0.48, 0.49, 0.4, 
+                0.51, 0.52, 0.53, 0.54, 0.55, 0.56, 0.57, 0.58, 0.59, 0.5, 
+                0.61, 0.62, 0.63, 0.64, 0.65, 0.66, 0.67, 0.68, 0.69, 0.6, 
+                0.71, 0.72, 0.73, 0.74, 0.75, 0.76, 0.77, 0.78, 0.79, 0.7, 
+                0.81, 0.82, 0.83, 0.84, 0.85, 0.86, 0.87, 0.88, 0.89, 0.9, 
+                0.91, 0.92, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98, 0.99, 1 }
+\draw[shift={(\x,0)},color=black] (0pt,1pt) -- (0pt,-1pt);
+
+\pause
+
+    \draw[color=red] (0.05, 0) circle (0.3cm);
+
+
+\pause
+
+\draw (0, -1.5) -- (1.0, -1.5);
+
+\draw[color=red] (0,0) -- (0, -1.5);
+\draw[color=red] (0.1, 0) -- (1, -1.5);
+
+
+\foreach \x in {0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1}
+\pgfmathsetmacro\result{\x*10}
+    \draw[shift={(\x,-1.5)},color=black] (0pt,2pt) -- (0pt,-2pt) node[below] {\tiny$\pgfmathprintnumber{\result}$cm};
+
+\foreach \z in {0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1,
+                   0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2,
+                   0.21, 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29, 0.3, 
+                   0.31, 0.32, 0.33, 0.34, 0.35, 0.36, 0.37, 0.38, 0.39, 0.3, 
+                   0.41, 0.42, 0.43, 0.44, 0.45, 0.46, 0.47, 0.48, 0.49, 0.4, 
+                   0.51, 0.52, 0.53, 0.54, 0.55, 0.56, 0.57, 0.58, 0.59, 0.5, 
+                   0.61, 0.62, 0.63, 0.64, 0.65, 0.66, 0.67, 0.68, 0.69, 0.6, 
+                   0.71, 0.72, 0.73, 0.74, 0.75, 0.76, 0.77, 0.78, 0.79, 0.7, 
+                   0.81, 0.82, 0.83, 0.84, 0.85, 0.86, 0.87, 0.88, 0.89, 0.9, 
+                   0.91, 0.92, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98, 0.99, 1 }
+\draw[shift={(\z, -1.5)},color=black] (0pt,1pt) -- (0pt,-1pt);
+
+\pause
+
+
+\draw[color=red] (0.05, -1.5) circle (0.3cm);
+
+\pause
+
+
+\draw[color=red] (0,-1.5) -- (0, -3.0);
+\draw[color=red] (0.1, -1.5) -- (1, -3.0);
+
+\draw (0, -3.0) -- (1, -3.0);
+
+
+\foreach \x in {0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1}
+\pgfmathsetmacro\result{\x*10}
+    \draw[shift={(\x,-3.0)},color=black] (0pt,2pt) -- (0pt,-2pt) node[below] {\tiny$\pgfmathprintnumber{\result}$mm};
+
+
+\end{tikzpicture}
+\end{center}
+
+\visible<7->{Kontrollspørsmål: Hvor mange millimeter er det i 0,5dm ?}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Prefikser: De mest brukte}
+    Dere har kanskje hørt at ''kilo betyr tusen'', eller at ''centi betyr hundredel''. Det er fordi disse
+    ordene kalles \textit{prefikser}
+    \begin{center}
+    \begin{tabular}{l l l}
+        \textbf{prefiks} & \textbf{forkortelse / symbol} & \textbf{verdi}            \\ \hline
+        Kilo             & k                             & 1000                      \\
+        Hekto            & h                             & 100                       \\
+        deka             & da                            & 10                        \\
+                         &                               & 1                         \\
+        desi             & d                             & $0,1 = \frac{1}{10}$      \\
+        centi            & c                             & $0,01 = \frac{1}{100}$    \\
+        milli            & m                             & $0,001 = \frac{1}{1000}$  \\ 
+    \end{tabular}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Prefikser: Noen flere}
+    \begin{center}
+    \begin{tabular}{l l l}
+        \textbf{prefiks} & \textbf{forkortelse / symbol} & \textbf{verdi}            \\ \hline
+        Terra            & T                             & 1 000 000 000 000         \\
+        Giga             & G                             & 1 000 000 000             \\
+        Mega             & M                             & 1 000 000                 \\ \hline
+        Kilo             & k                             & 1000                      \\
+        Hekto            & h                             & 100                       \\
+        deka             & da                            & 10                        \\
+                         &                               & 1                         \\
+        desi             & d                             & $0,1 = \frac{1}{10}$      \\
+        centi            & c                             & $0,01 = \frac{1}{100}$    \\
+        milli            & m                             & $0,001 = \frac{1}{1000}$  \\ \hline
+        mikro            & $\mu$                         & $0,000 001 = \frac{1}{1 000 000} \\
+        nano             & n                             & $0,000 000 001 = \frac{1}{1 000 000 000} \\
+    \end{tabular}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Prefiks: gjøre om til meter}
+Ifølge tabellen har vi at centi er en hundredel. Vi kan bruke dette til å gjøre om til
+grunnenheten for lengde, meter:
+    \begin{eksempel}
+        Skriv 543\text{cm} som meter: \newline
+        \textit{Løsning:} Vi bytter ut c med $0,01$:
+        \begin{align*}
+            543\text{cm} & = 543\cdot0,01\cdot \text{m} \\
+        \end{align*}
+    \end{eksempel}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Prefiks: gjøre om til meter}
+Ifølge tabellen har vi at centi er en hundredel. Vi kan bruke dette til å gjøre om til
+grunnenheten for lengde, meter:
+    \begin{eksempel}
+        Skriv 543\text{cm} som meter: \newline
+        \textit{Løsning:} Vi bytter ut c med $0,01$:
+        \begin{align*}
+            543\text{cm} & =  543\cdot0,01\cdot \text{m} \\
+            & =  5,43\text{m}
+        \end{align*}
+    \end{eksempel}
+    \pause
+    \begin{oppgave}[Gjør om til meter:]
+        \begin{tabular}{l l l l l}
+            a) 247\text{cm} & b) 6420\text{mm} & c) 2,34\text{km} & d) 4,3\text{km} & e) 1,5\text{cm}
+        \end{tabular}
+    \end{oppgave}
+\end{frame}
+
+\begin{frame}
+    \begin{center}
+        \begin{tikzpicture}[xscale=1, yscale=0.7]
+        \draw (0, 0) -- (8,0) -- (8, 1) -- (0,1) -- cycle;
+        \draw (1,1) -- (1,0);
+        \draw (2,1) -- (2,0);
+        \draw (3,1) -- (3,0);
+        \draw (4,1) -- (4,0);
+        \draw (5,1) -- (5,0);
+        \draw (6,1) -- (6,0);
+        \draw (7,1) -- (7,0);
+
+        \draw (0.5, 0.5) node {mm};
+        \draw (1.5, 0.5) node {cm};
+        \draw (2.5, 0.5) node {dm};
+        \draw (3.5, 0.5) node {1m};
+        \draw[blue] (4.5, 0.5) node {\tiny da m};
+        \draw[blue] (5.5, 0.5) node {\tiny hm};
+        \draw (6.5, 0.5) node {km};
+        \draw (7.5, 0.5) node {mil};
+
+\pause
+
+        \draw[hpil] (0.5, 1) to [out=40, in=140] (1.5, 1);
+        \draw (1, 1.4) node {\tiny$\text{:}10$};
+
+\pause
+        \draw[hpil] (1.5, 1) to [out=40, in=140] (2.5, 1);
+        \draw (2, 1.4) node {\tiny$\text{:}10$};
+
+
+\pause
+        \draw[hpil] (2.5, 1) to [out=40, in=140] (3.5, 1);
+        \draw[hpil] (3.5, 1) to [out=40, in=140] (4.5, 1);
+        \draw[hpil] (4.5, 1) to [out=40, in=140] (5.5, 1);
+        \draw[hpil] (5.5, 1) to [out=40, in=140] (6.5, 1);
+        \draw[hpil] (6.5, 1) to [out=40, in=140] (7.5, 1);
+
+
+        \draw (3, 1.4) node {\tiny$\text{:}10$};
+        \draw (4, 1.4) node {\tiny$\text{:}10$};
+        \draw (5, 1.4) node {\tiny$\text{:}10$};
+        \draw (6, 1.4) node {\tiny$\text{:}10$};
+        \draw (7, 1.4) node {\tiny$\text{:}10$};
+
+\pause  
+            \draw[hpil] (3.5,1.2) to [out=60, in=110] (6.5, 1.2);
+            \draw (5,2.3) node {\tiny$\text{:}1000$};
+
+\pause 
+        \draw[hpil] (7.5, 0) to [out=-150, in=-40] (6.5, 0);
+        \draw (7, -0.4) node {\tiny$\cdot10$};
+
+
+
+\pause
+        \draw[hpil] (6.5, 0) to [out=-150, in=-40] (5.5, 0);
+        \draw[hpil] (5.5, 0) to [out=-150, in=-40] (4.5, 0);
+        \draw[hpil] (4.5, 0) to [out=-150, in=-40] (3.5, 0);
+        \draw[hpil] (3.5, 0) to [out=-150, in=-40] (2.5, 0);
+        \draw[hpil] (2.5, 0) to [out=-150, in=-40] (1.5, 0);
+        \draw[hpil] (1.5, 0) to [out=-150, in=-40] (0.5, 0);
+
+        \draw (6, -0.4) node {\tiny$\cdot10$};
+        \draw (5, -0.4) node {\tiny$\cdot10$};
+        \draw (4, -0.4) node {\tiny$\cdot10$};
+        \draw (3, -0.4) node {\tiny$\cdot10$};
+        \draw (2, -0.4) node {\tiny$\cdot10$};
+        \draw (1, -0.4) node {\tiny$\cdot10$};
+
+\pause  
+            \draw[hpil] (6.5,-0.2) to [out=-110, in=-60] (3.5, -0.2);
+            \draw (5,-1.4) node {\tiny$\cdot1000$};
+
+
+    \end{tikzpicture}
+    \end{center}
+    \begin{eksempel}
+        Skriv 5,45\text{mm} som desimeter (dm). \newline
+        Skriv 1,56dm som millimeter (mm) \newline
+        Skriv 50 000 \text{cm} som meter (m) \newline
+        Skriv 75 000 \text{cm} som kilometer (km).
+    \end{eksempel}
+\end{frame}
+
+
+\begin{frame}
+    \begin{oppgave}[Gjør om til millimeter:]
+        \begin{tabular}{l l l l l}
+            a) 0,837\text{cm} & b) 5,4\text{m} & c) 439\text{cm} & d) 4,34\text{dm}
+        \end{tabular}
+    \end{oppgave}
+    \pause
+    \begin{oppgave}[Gjør om til centimeter:]
+        \begin{tabular}{l l l l l}
+            a) 0,125\text{mm} & b) 1,23\text{m} & c) 439\text{dm} & d) 0,6\text{km}
+        \end{tabular}
+    \end{oppgave}
+    \pause
+    \begin{oppgave}[Gjør om til kilometer:]
+        \begin{tabular}{l l l l l}
+            a) 600\text{m} & b) 1230\text{m} & c) 25 000\text{cm} & d) 300 000\text{cm} \\ e) 45 mil
+        \end{tabular}
+    \end{oppgave}
+\end{frame}
+
+\end{document}
